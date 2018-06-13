@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rent index{% endblock %}
+
+{% block body %}
+    <h1>Rent index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Nbpeople</th>
+                <th>Rentlocation</th>
+                <th>Renttype</th>
+                <th>Monthlyrent</th>
+                <th>RentAuthor</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rent in rents %}
+            <tr>
+                <td>{{ rent.id }}</td>
+                <td>{{ rent.name }}</td>
+                <td>{{ rent.nbpeople }}</td>
+                <td>{{ rent.rentlocation }}</td>
+                <td>{{ rent.renttype }}</td>
+                <td>{{ rent.monthlyrent }}</td>
+                <td>{{rent.rentAuthor}}</td>
+                <td>
+                    <a href="{{ path('rent_show', {'id': rent.id}) }}">show</a>
+                    <a href="{{ path('rent_edit', {'id': rent.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rent_new') }}">Create new</a>
+{% endblock %}

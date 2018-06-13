@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Renty ! - Une solution 3-en-1{% endblock %}
+
+{% block body %}
+
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Pourquoi Renty ?</h1>
+        <p class="lead">
+            La solution tout-en-un pour trouver un travail et un logement associé. Idéal pour les saisonniers
+            et tout ceux qui ont le projet de changer de ville.
+        </p>
+        <h2 class="display-4"> vous êtes ?</h2>
+    </div>
+
+    <div class="container">
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Propriétaire</h4>
+                </div>
+                <div class="card-body">
+
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>une location à la saison</li>
+                        <li> durée garantie<li>
+                    </ul>
+                    <a href="{{ path('rent_new')}}"><button type="button" class="btn btn-lg btn-block btn-primary owner">Je loue un bien</button></a>
+                </div>
+            </div>
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Une Entreprise</h4>
+                </div>
+                <div class="card-body">
+
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>créer un job</li>
+                        <li> lier une location</li>
+
+
+                    </ul>
+                    <a href="{{ path('job_new')}}"><button type="button" class="btn btn-lg btn-block btn-primary company">Je crée un job</button></a>
+                </div>
+            </div>
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Un futur Salarié</h4>
+                </div>
+                <div class="card-body">
+
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>une liste de job</li>
+                        <li>avec un logement déjà trouvé</li>
+
+                    </ul>
+                    <a href="{{ path('job_index')}}"><button type="button" class="btn btn-lg btn-block btn-primary worker">Voir les annonces</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

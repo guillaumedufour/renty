@@ -1,0 +1,76 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+html {
+    font-size: 14px;
+}
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.container {
+    max-width: 960px;
+}
+
+.pricing-header {
+    max-width: 700px;
+}
+
+.card-deck .card {
+    min-width: 220px;
+}
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+img.logo{
+    width:150px;
+}
+footer img{
+    max-width: 150px;
+    margin-top:-15px;
+}
+
+.btn-primary{
+    background-color:#90ddf4;
+    border-color:#90ddf4;
+}
+
+.owner{
+    background-color:#89e065;
+    border-color:#89e065;
+}
+
+.company{
+    background-color:#90ddf4;
+    border-color:#90ddf4;
+}
+
+.worker{
+    background-color:#ea844b;
+    border-color:#ea844b;
+}
+
+.img-center{
+    text-align: center;
+}
+
+.btn:hover{
+    background-color:#343a40;
+    border-color:#343a40;
+    color:white;
+}
+
+a{
+    color:#ea844b;
+}
+a:hover{
+    color:#343a40;
+}
+
+textarea{
+    height:600px;
+}
