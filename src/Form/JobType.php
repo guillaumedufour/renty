@@ -12,11 +12,14 @@ class JobType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('joblocation')
-            ->add('description')
-            ->add('monthlyWage')
+            ->add('jobTitle')
+            ->add('jobContent')
             ->add('jobAuthor')
+            ->add('jobContact')
+            ->add('jobDate')
+            ->add('monthlyWage')
+            ->add('jobLocation')
+            ->add('housed')
         ;
     }
 

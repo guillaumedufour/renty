@@ -12,12 +12,15 @@ class RentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('nbpeople')
-            ->add('rentlocation')
-            ->add('renttype')
-            ->add('monthlyrent')
+            ->add('rentTitle')
+            ->add('rentContent')
             ->add('rentAuthor')
+            ->add('rentContact')
+            ->add('rentDate')
+            ->add('monthlyCost')
+            ->add('rentLocation')
+            ->add('surface')
+            ->add('furnished')
         ;
     }
 

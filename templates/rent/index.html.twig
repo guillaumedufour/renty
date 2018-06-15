@@ -3,18 +3,19 @@
 {% block title %}Rent index{% endblock %}
 
 {% block body %}
-    <h1>Rent index</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Nbpeople</th>
-                <th>Rentlocation</th>
-                <th>Renttype</th>
-                <th>Monthlyrent</th>
-                <th>RentAuthor</th>
+                <th>ref.</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Auteur</th>
+                <th>Date</th>
+                <th>Loyer</th>
+                <th>Lieu</th>
+                <th>Surface</th>
+                <th>Meublé?</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,24 +23,26 @@
         {% for rent in rents %}
             <tr>
                 <td>{{ rent.id }}</td>
-                <td>{{ rent.name }}</td>
-                <td>{{ rent.nbpeople }}</td>
-                <td>{{ rent.rentlocation }}</td>
-                <td>{{ rent.renttype }}</td>
-                <td>{{ rent.monthlyrent }}</td>
-                <td>{{rent.rentAuthor}}</td>
+                <td>{{ rent.rentTitle }}</td>
+                <td>{{ rent.rentContent[:50] ~ '...' }}</td>
+                <td>{{ rent.rentAuthor }}</td>
+                <td>{{ rent.rentDate ? rent.rentDate|date('Y-m-d') : '' }}</td>
+                <td>{{ rent.monthlyCost }}</td>
+                <td>{{ rent.rentLocation }}</td>
+                <td>{{ rent.surface ~ 'm²' }}</td>
+                <td>{{ rent.furnished ? 'Oui' : 'Non' }}</td>
                 <td>
-                    <a href="{{ path('rent_show', {'id': rent.id}) }}">show</a>
-                    <a href="{{ path('rent_edit', {'id': rent.id}) }}">edit</a>
+                    <a href="{{ path('rent_show', {'id': rent.id}) }}">montrer</a>
+                    <a href="{{ path('rent_edit', {'id': rent.id}) }}">editer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="11">pas d'annonces répertoriées</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('rent_new') }}">Create new</a>
+    <a href="{{ path('rent_new') }}">Créer nouvelle location</a>
 {% endblock %}

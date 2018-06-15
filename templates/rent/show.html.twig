@@ -3,40 +3,57 @@
 {% block title %}Rent{% endblock %}
 
 {% block body %}
-    <h1>Rent</h1>
-
+   
+<div class="container">
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>Ref.</th>
                 <td>{{ rent.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
-                <td>{{ rent.name }}</td>
+                <th>Titre</th>
+                <td>{{ rent.rentTitle }}</td>
             </tr>
             <tr>
-                <th>Nbpeople</th>
-                <td>{{ rent.nbpeople }}</td>
+                <th>Description</th>
+                <td>{{ rent.rentContent }}</td>
             </tr>
             <tr>
-                <th>Rentlocation</th>
-                <td>{{ rent.rentlocation }}</td>
+                <th>Author</th>
+                <td>{{ rent.rentAuthor }}</td>
             </tr>
             <tr>
-                <th>Renttype</th>
-                <td>{{ rent.renttype }}</td>
+                <th>Contact</th>
+                <td>{{ rent.rentContact }}</td>
             </tr>
             <tr>
-                <th>Monthlyrent</th>
-                <td>{{ rent.monthlyrent }}</td>
+                <th>Date</th>
+                <td>{{ rent.rentDate ? rent.rentDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Loyer</th>
+                <td>{{ rent.monthlyCost }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ rent.rentLocation }}</td>
+            </tr>
+            <tr>
+                <th>Surface</th>
+                <td>{{ rent.surface }}</td>
+            </tr>
+            <tr>
+                <th>Meublé?</th>
+                <td>{{ rent.furnished ? 'Yes' : 'No' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('rent_index') }}">back to list</a>
+    <a href="{{ path('rent_index') }}">retour à la liste</a>
 
-    <a href="{{ path('rent_edit', {'id': rent.id}) }}">edit</a>
+    <a href="{{ path('rent_edit', {'id': rent.id}) }}">editer</a>
 
     {{ include('rent/_delete_form.html.twig') }}
+</div>
 {% endblock %}

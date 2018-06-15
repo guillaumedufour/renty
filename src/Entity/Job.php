@@ -9,103 +9,151 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Job
 {
-/**
- * @ORM\Id()
- * @ORM\GeneratedValue()
- * @ORM\Column(type="integer")
- */
-private $id;
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
-/**
- * @ORM\Column(type="string", length=255, nullable=true)
- */
-private $title;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $jobTitle;
 
-/**
- * @ORM\Column(type="string", length=255, nullable=true)
- */
-private $joblocation;
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $jobContent;
 
-/**
- * @ORM\Column(type="text", nullable=true)
- */
-private $description;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $jobAuthor;
 
-/**
- * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="jobObject")
- * @ORM\JoinColumn(nullable=false)
- */
-private $jobAuthor;
-private $__EXTRA__LINE;
-/**
- * @ORM\Column(type="float")
- */
-private $monthlyWage;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $jobContact;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $jobDate;
 
-public function getTitle(): ?string
-{
-return $this->title;
-}
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $monthlyWage;
 
-public function setTitle(?string $title): self
-{
-$this->title = $title;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $jobLocation;
 
-return $this;
-}
-public function getId()
-{
-return $this->id;
-}
-public function getJoblocation(): ?string
-{
-return $this->joblocation;
-}
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $housed;
 
-public function setJoblocation(?string $joblocation): self
-{
-$this->joblocation = $joblocation;
+    public function getId()
+    {
+        return $this->id;
+    }
 
-return $this;
-}
+    public function getJobTitle(): ?string
+    {
+        return $this->jobTitle;
+    }
 
-public function getDescription(): ?string
-{
-return $this->description;
-}
+    public function setJobTitle(string $jobTitle): self
+    {
+        $this->jobTitle = $jobTitle;
 
-public function setDescription(?string $description): self
-{
-$this->description = $description;
+        return $this;
+    }
 
-return $this;
-}
+    public function getJobContent(): ?string
+    {
+        return $this->jobContent;
+    }
 
-public function getJobAuthor(): ?User
-{
-return $this->jobAuthor;
-}
+    public function setJobContent(string $jobContent): self
+    {
+        $this->jobContent = $jobContent;
 
-public function setJobAuthor(?User $jobAuthor): self
-{
-$this->jobAuthor = $jobAuthor;
+        return $this;
+    }
 
-return $this;
-}
+    public function getJobAuthor(): ?string
+    {
+        return $this->jobAuthor;
+    }
 
+    public function setJobAuthor(string $jobAuthor): self
+    {
+        $this->jobAuthor = $jobAuthor;
 
-public function getMonthlyWage(): ?float
-{
-return $this->monthlyWage;
-}
+        return $this;
+    }
 
-public function setMonthlyWage(float $monthlyWage): self
-{
-$this->monthlyWage = $monthlyWage;
-$__EXTRA__LINE;
-return $this;
-}
+    public function getJobContact(): ?string
+    {
+        return $this->jobContact;
+    }
 
+    public function setJobContact(string $jobContact): self
+    {
+        $this->jobContact = $jobContact;
 
+        return $this;
+    }
+
+    public function getJobDate(): ?\DateTimeInterface
+    {
+        return $this->jobDate;
+    }
+
+    public function setJobDate(\DateTimeInterface $jobDate): self
+    {
+        $this->jobDate = $jobDate;
+
+        return $this;
+    }
+
+    public function getMonthlyWage(): ?int
+    {
+        return $this->monthlyWage;
+    }
+
+    public function setMonthlyWage(int $monthlyWage): self
+    {
+        $this->monthlyWage = $monthlyWage;
+
+        return $this;
+    }
+
+    public function getJobLocation(): ?string
+    {
+        return $this->jobLocation;
+    }
+
+    public function setJobLocation(string $jobLocation): self
+    {
+        $this->jobLocation = $jobLocation;
+
+        return $this;
+    }
+
+    public function getHoused(): ?bool
+    {
+        return $this->housed;
+    }
+
+    public function setHoused(bool $housed): self
+    {
+        $this->housed = $housed;
+
+        return $this;
+    }
 }
