@@ -14,13 +14,14 @@ class RentType extends AbstractType
         $builder
             ->add('rentTitle')
             ->add('rentContent')
+            ->add('rentDatePost')
+            ->add('dispoDate')
+            ->add('monthCost')
+            ->add('rentSurface')
+            ->add('furnished')
             ->add('rentAuthor')
             ->add('rentContact')
-            ->add('rentDate')
-            ->add('monthlyCost')
-            ->add('rentLocation')
-            ->add('surface')
-            ->add('furnished')
+            ->add('rentPlace')
         ;
     }
 

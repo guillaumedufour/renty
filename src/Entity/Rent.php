@@ -27,39 +27,47 @@ class Rent
     private $rentContent;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="date")
      */
-    private $rentAuthor;
+    private $rentDatePost;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="date")
      */
-    private $rentContact;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $rentDate;
+    private $dispoDate;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $monthlyCost;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $rentLocation;
+    private $monthCost;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $surface;
+    private $rentSurface;
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $furnished;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="rentsFromUser")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $rentAuthor;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="rentsFromUser")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $rentContact;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Place")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $rentPlace;
 
     public function getId()
     {
@@ -90,74 +98,50 @@ class Rent
         return $this;
     }
 
-    public function getRentAuthor(): ?string
+    public function getRentDatePost(): ?\DateTimeInterface
     {
-        return $this->rentAuthor;
+        return $this->rentDatePost;
     }
 
-    public function setRentAuthor(string $rentAuthor): self
+    public function setRentDatePost(\DateTimeInterface $rentDatePost): self
     {
-        $this->rentAuthor = $rentAuthor;
+        $this->rentDatePost = $rentDatePost;
 
         return $this;
     }
 
-    public function getRentContact(): ?string
+    public function getDispoDate(): ?\DateTimeInterface
     {
-        return $this->rentContact;
+        return $this->dispoDate;
     }
 
-    public function setRentContact(string $rentContact): self
+    public function setDispoDate(\DateTimeInterface $dispoDate): self
     {
-        $this->rentContact = $rentContact;
+        $this->dispoDate = $dispoDate;
 
         return $this;
     }
 
-    public function getRentDate(): ?\DateTimeInterface
+    public function getMonthCost(): ?int
     {
-        return $this->rentDate;
+        return $this->monthCost;
     }
 
-    public function setRentDate(\DateTimeInterface $rentDate): self
+    public function setMonthCost(int $monthCost): self
     {
-        $this->rentDate = $rentDate;
+        $this->monthCost = $monthCost;
 
         return $this;
     }
 
-    public function getMonthlyCost(): ?int
+    public function getRentSurface(): ?int
     {
-        return $this->monthlyCost;
+        return $this->rentSurface;
     }
 
-    public function setMonthlyCost(int $monthlyCost): self
+    public function setRentSurface(int $rentSurface): self
     {
-        $this->monthlyCost = $monthlyCost;
-
-        return $this;
-    }
-
-    public function getRentLocation(): ?string
-    {
-        return $this->rentLocation;
-    }
-
-    public function setRentLocation(string $rentLocation): self
-    {
-        $this->rentLocation = $rentLocation;
-
-        return $this;
-    }
-
-    public function getSurface(): ?int
-    {
-        return $this->surface;
-    }
-
-    public function setSurface(int $surface): self
-    {
-        $this->surface = $surface;
+        $this->rentSurface = $rentSurface;
 
         return $this;
     }
@@ -170,6 +154,42 @@ class Rent
     public function setFurnished(bool $furnished): self
     {
         $this->furnished = $furnished;
+
+        return $this;
+    }
+
+    public function getRentAuthor(): ?User
+    {
+        return $this->rentAuthor;
+    }
+
+    public function setRentAuthor(?User $rentAuthor): self
+    {
+        $this->rentAuthor = $rentAuthor;
+
+        return $this;
+    }
+
+    public function getRentContact(): ?User
+    {
+        return $this->rentContact;
+    }
+
+    public function setRentContact(?User $rentContact): self
+    {
+        $this->rentContact = $rentContact;
+
+        return $this;
+    }
+
+    public function getRentPlace(): ?Place
+    {
+        return $this->rentPlace;
+    }
+
+    public function setRentPlace(?Place $rentPlace): self
+    {
+        $this->rentPlace = $rentPlace;
 
         return $this;
     }

@@ -3,57 +3,48 @@
 {% block title %}Rent{% endblock %}
 
 {% block body %}
-   
-<div class="container">
+    <h1>Rent</h1>
+
     <table class="table">
         <tbody>
             <tr>
-                <th>Ref.</th>
+                <th>Id</th>
                 <td>{{ rent.id }}</td>
             </tr>
             <tr>
-                <th>Titre</th>
+                <th>RentTitle</th>
                 <td>{{ rent.rentTitle }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>RentContent</th>
                 <td>{{ rent.rentContent }}</td>
             </tr>
             <tr>
-                <th>Author</th>
-                <td>{{ rent.rentAuthor }}</td>
+                <th>RentDatePost</th>
+                <td>{{ rent.rentDatePost ? rent.rentDatePost|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Contact</th>
-                <td>{{ rent.rentContact }}</td>
+                <th>DispoDate</th>
+                <td>{{ rent.dispoDate ? rent.dispoDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Date</th>
-                <td>{{ rent.rentDate ? rent.rentDate|date('Y-m-d H:i:s') : '' }}</td>
+                <th>MonthCost</th>
+                <td>{{ rent.monthCost }}</td>
             </tr>
             <tr>
-                <th>Loyer</th>
-                <td>{{ rent.monthlyCost }}</td>
+                <th>RentSurface</th>
+                <td>{{ rent.rentSurface }}</td>
             </tr>
             <tr>
-                <th>Lieu</th>
-                <td>{{ rent.rentLocation }}</td>
-            </tr>
-            <tr>
-                <th>Surface</th>
-                <td>{{ rent.surface }}</td>
-            </tr>
-            <tr>
-                <th>Meublé?</th>
+                <th>Furnished</th>
                 <td>{{ rent.furnished ? 'Yes' : 'No' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('rent_index') }}">retour à la liste</a>
+    <a href="{{ path('rent_index') }}">back to list</a>
 
-    <a href="{{ path('rent_edit', {'id': rent.id}) }}">editer</a>
+    <a href="{{ path('rent_edit', {'id': rent.id}) }}">edit</a>
 
     {{ include('rent/_delete_form.html.twig') }}
-</div>
 {% endblock %}

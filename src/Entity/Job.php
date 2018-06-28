@@ -27,34 +27,42 @@ class Job
     private $jobContent;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="jobFromUser")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $jobAuthor;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="jobFromContact")
      */
     private $jobContact;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
-    private $jobDate;
+    private $jobDateBegin;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $monthlyWage;
+    private $jobWages;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Place", inversedBy="jobsInPlace")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $jobLocation;
+    private $jobPlace;
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $housed;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\SectorArea", inversedBy="jobsFromSector")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $jobSector;
 
     public function getId()
     {
@@ -85,62 +93,62 @@ class Job
         return $this;
     }
 
-    public function getJobAuthor(): ?string
+    public function getJobAuthor(): ?User
     {
         return $this->jobAuthor;
     }
 
-    public function setJobAuthor(string $jobAuthor): self
+    public function setJobAuthor(?User $jobAuthor): self
     {
         $this->jobAuthor = $jobAuthor;
 
         return $this;
     }
 
-    public function getJobContact(): ?string
+    public function getJobContact(): ?User
     {
         return $this->jobContact;
     }
 
-    public function setJobContact(string $jobContact): self
+    public function setJobContact(?User $jobContact): self
     {
         $this->jobContact = $jobContact;
 
         return $this;
     }
 
-    public function getJobDate(): ?\DateTimeInterface
+    public function getJobDateBegin(): ?\DateTimeInterface
     {
-        return $this->jobDate;
+        return $this->jobDateBegin;
     }
 
-    public function setJobDate(\DateTimeInterface $jobDate): self
+    public function setJobDateBegin(\DateTimeInterface $jobDateBegin): self
     {
-        $this->jobDate = $jobDate;
+        $this->jobDateBegin = $jobDateBegin;
 
         return $this;
     }
 
-    public function getMonthlyWage(): ?int
+    public function getJobWages(): ?int
     {
-        return $this->monthlyWage;
+        return $this->jobWages;
     }
 
-    public function setMonthlyWage(int $monthlyWage): self
+    public function setJobWages(int $jobWages): self
     {
-        $this->monthlyWage = $monthlyWage;
+        $this->jobWages = $jobWages;
 
         return $this;
     }
 
-    public function getJobLocation(): ?string
+    public function getJobPlace(): ?Place
     {
-        return $this->jobLocation;
+        return $this->jobPlace;
     }
 
-    public function setJobLocation(string $jobLocation): self
+    public function setJobPlace(?Place $jobPlace): self
     {
-        $this->jobLocation = $jobLocation;
+        $this->jobPlace = $jobPlace;
 
         return $this;
     }
@@ -153,6 +161,18 @@ class Job
     public function setHoused(bool $housed): self
     {
         $this->housed = $housed;
+
+        return $this;
+    }
+
+    public function getJobSector(): ?SectorArea
+    {
+        return $this->jobSector;
+    }
+
+    public function setJobSector(?SectorArea $jobSector): self
+    {
+        $this->jobSector = $jobSector;
 
         return $this;
     }

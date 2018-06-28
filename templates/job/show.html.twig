@@ -3,55 +3,40 @@
 {% block title %}Job{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1>Job</h1>
+    <h1>Job</h1>
 
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>ref.</th>
-                    <td>{{ job.id }}</td>
-                </tr>
-                <tr>
-                    <th>Titre du poste</th>
-                    <td>{{ job.jobTitle }}</td>
-                </tr>
-                <tr>
-                    <th>Description</th>
-                    <td>{{ job.jobContent }}</td>
-                </tr>
-                <tr>
-                    <th>Auteur</th>
-                    <td>{{ job.jobAuthor }}</td>
-                </tr>
-                <tr>
-                    <th>Contact</th>
-                    <td>{{ job.jobContact }}</td>
-                </tr>
-                <tr>
-                    <th>Date</th>
-                    <td>{{ job.jobDate ? job.jobDate|date('Y-m-d H:i:s') : '' }}</td>
-                </tr>
-                <tr>
-                    <th>Salaire Mens.</th>
-                    <td>{{ job.monthlyWage }}</td>
-                </tr>
-                <tr>
-                    <th>Lieu</th>
-                    <td>{{ job.jobLocation }}</td>
-                </tr>
-                <tr>
-                    <th>Logé ?</th>
-                    <td>{{ job.housed ? 'Yes' : 'No' }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ job.id }}</td>
+            </tr>
+            <tr>
+                <th>JobTitle</th>
+                <td>{{ job.jobTitle }}</td>
+            </tr>
+            <tr>
+                <th>JobContent</th>
+                <td>{{ job.jobContent }}</td>
+            </tr>
+            <tr>
+                <th>JobDateBegin</th>
+                <td>{{ job.jobDateBegin ? job.jobDateBegin|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>JobWages</th>
+                <td>{{ job.jobWages }}</td>
+            </tr>
+            <tr>
+                <th>Housed</th>
+                <td>{{ job.housed ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-        <a href="{{ path('job_index') }}">retour à la liste</a>
+    <a href="{{ path('job_index') }}">back to list</a>
 
-        <a href="{{ path('job_edit', {'id': job.id}) }}">editer</a>
+    <a href="{{ path('job_edit', {'id': job.id}) }}">edit</a>
 
-        {{ include('job/_delete_form.html.twig') }}
-
-    </div>
+    {{ include('job/_delete_form.html.twig') }}
 {% endblock %}

@@ -2,32 +2,24 @@
 
 namespace App\Form;
 
-use App\Entity\Job;
+use App\Entity\Role;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class JobType extends AbstractType
+class RoleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('jobTitle')
-            ->add('jobContent')
-            ->add('jobDateBegin')
-            ->add('jobWages')
-            ->add('housed')
-            ->add('jobAuthor')
-            ->add('jobContact')
-            ->add('jobPlace')
-            ->add('jobSector')
+            ->add('roleTitle')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Job::class,
+            'data_class' => Role::class,
         ]);
     }
 }
