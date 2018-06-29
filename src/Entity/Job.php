@@ -26,16 +26,7 @@ class Job
      */
     private $jobContent;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="jobFromUser")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $jobAuthor;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="jobFromContact")
-     */
-    private $jobContact;
 
     /**
      * @ORM\Column(type="date")
@@ -93,29 +84,6 @@ class Job
         return $this;
     }
 
-    public function getJobAuthor(): ?User
-    {
-        return $this->jobAuthor;
-    }
-
-    public function setJobAuthor(?User $jobAuthor): self
-    {
-        $this->jobAuthor = $jobAuthor;
-
-        return $this;
-    }
-
-    public function getJobContact(): ?User
-    {
-        return $this->jobContact;
-    }
-
-    public function setJobContact(?User $jobContact): self
-    {
-        $this->jobContact = $jobContact;
-
-        return $this;
-    }
 
     public function getJobDateBegin(): ?\DateTimeInterface
     {

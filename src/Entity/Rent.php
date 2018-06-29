@@ -4,11 +4,18 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RentRepository")
  */
 class Rent
 {
+    public function __construct()
+{
+    $this->rentDatePost = new \DateTime('now');
+    $this->dispoDate = new \DateTime('now');
+}
+    
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -34,6 +41,7 @@ class Rent
     /**
      * @ORM\Column(type="date")
      */
+    
     private $dispoDate;
 
     /**
@@ -51,17 +59,7 @@ class Rent
      */
     private $furnished;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="rentsFromUser")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $rentAuthor;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="rentsFromUser")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $rentContact;
+ 
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Place")
@@ -158,29 +156,6 @@ class Rent
         return $this;
     }
 
-    public function getRentAuthor(): ?User
-    {
-        return $this->rentAuthor;
-    }
-
-    public function setRentAuthor(?User $rentAuthor): self
-    {
-        $this->rentAuthor = $rentAuthor;
-
-        return $this;
-    }
-
-    public function getRentContact(): ?User
-    {
-        return $this->rentContact;
-    }
-
-    public function setRentContact(?User $rentContact): self
-    {
-        $this->rentContact = $rentContact;
-
-        return $this;
-    }
 
     public function getRentPlace(): ?Place
     {

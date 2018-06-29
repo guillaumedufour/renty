@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>JobDateBegin</th>
-                <td>{{ job.jobDateBegin ? job.jobDateBegin|date('Y-m-d') : '' }}</td>
+                <td>{{ job.jobDateBegin ? job.jobDateBegin|date('d/m/Y') : '' }}</td>
             </tr>
             <tr>
                 <th>JobWages</th>
@@ -29,7 +29,7 @@
             </tr>
             <tr>
                 <th>Housed</th>
-                <td>{{ job.housed ? 'Yes' : 'No' }}</td>
+                <td>{{ job.housed ? 'oui' : 'non' }}</td>
             </tr>
         </tbody>
     </table>

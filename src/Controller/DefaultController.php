@@ -16,4 +16,13 @@ class DefaultController extends Controller
             'controller_name' => 'DefaultController',
         ]);
     }
+    
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function admin()
+    {
+        return $this->render('Admin/index.html.twig');
+    }
+ 
 }

@@ -72,5 +72,5 @@ a:hover{
 }
 
 textarea{
-    height:600px;
+    min-height: 300px;
 }

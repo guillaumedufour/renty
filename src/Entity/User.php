@@ -5,209 +5,147 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
-{
+class User implements UserInterface, \Serializable {
+
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @var int
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $fullName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
      */
-    private $userType;
+    private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(type="string")
      */
-    private $userMail;
+    private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Job", mappedBy="jobAuthor", orphanRemoval=true)
+     * @var array
+     *
+     * @ORM\Column(type="json")
      */
-    private $jobFromUser;
+    private $roles = [];
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Job", mappedBy="jobContact")
-     */
-    private $jobFromContact;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Rent", mappedBy="rentAuthor", orphanRemoval=true)
-     */
-    private $rentsFromUser;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Role", inversedBy="usersFromRole")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $userRole;
-
-    public function __construct()
-    {
-        $this->jobFromUser = new ArrayCollection();
-        $this->jobFromContact = new ArrayCollection();
-        $this->rentsFromUser = new ArrayCollection();
-    }
-
-    public function getId()
-    {
+    public function getId(): int {
         return $this->id;
     }
 
-    public function getUsername(): ?string
-    {
+    public function setFullName(string $fullName): void {
+        $this->fullName = $fullName;
+    }
+
+    public function getFullName(): string {
+        return $this->fullName;
+    }
+
+    public function getUsername(): string {
         return $this->username;
     }
 
-    public function setUsername(string $username): self
-    {
+    public function setUsername(string $username): void {
         $this->username = $username;
-
-        return $this;
     }
 
-    public function getUserType(): ?string
-    {
-        return $this->userType;
+    public function getEmail(): string {
+        return $this->email;
     }
 
-    public function setUserType(string $userType): self
-    {
-        $this->userType = $userType;
-
-        return $this;
+    public function setEmail(string $email): void {
+        $this->email = $email;
     }
 
-    public function getUserMail(): ?string
-    {
-        return $this->userMail;
+    public function getPassword(): string {
+        return $this->password;
     }
 
-    public function setUserMail(?string $userMail): self
-    {
-        $this->userMail = $userMail;
-
-        return $this;
+    public function setPassword(string $password): void {
+        $this->password = $password;
     }
 
     /**
-     * @return Collection|Job[]
+     * Retourne les rôles de l'user
      */
-    public function getJobFromUser(): Collection
-    {
-        return $this->jobFromUser;
-    }
+    public function getRoles(): array {
+        $roles = $this->roles;
 
-    public function addJobFromUser(Job $jobFromUser): self
-    {
-        if (!$this->jobFromUser->contains($jobFromUser)) {
-            $this->jobFromUser[] = $jobFromUser;
-            $jobFromUser->setJobAuthor($this);
+        // Afin d'être sûr qu'un user a toujours au moins 1 rôle
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
         }
 
-        return $this;
+        return array_unique($roles);
     }
 
-    public function removeJobFromUser(Job $jobFromUser): self
-    {
-        if ($this->jobFromUser->contains($jobFromUser)) {
-            $this->jobFromUser->removeElement($jobFromUser);
-            // set the owning side to null (unless already changed)
-            if ($jobFromUser->getJobAuthor() === $this) {
-                $jobFromUser->setJobAuthor(null);
-            }
-        }
-
-        return $this;
+    public function setRoles(array $roles): void {
+        $this->roles = $roles;
     }
 
     /**
-     * @return Collection|Job[]
+     * Retour le salt qui a servi à coder le mot de passe
+     *
+     * {@inheritdoc}
      */
-    public function getJobFromContact(): Collection
-    {
-        return $this->jobFromContact;
-    }
+    public function getSalt(): ?string {
+        // See "Do you need to use a Salt?" at https://symfony.com/doc/current/cookbook/security/entity_provider.html
+        // we're using bcrypt in security.yml to encode the password, so
+        // the salt value is built-in and you don't have to generate one
 
-    public function addJobFromContact(Job $jobFromContact): self
-    {
-        if (!$this->jobFromContact->contains($jobFromContact)) {
-            $this->jobFromContact[] = $jobFromContact;
-            $jobFromContact->setJobContact($this);
-        }
-
-        return $this;
-    }
-
-    public function removeJobFromContact(Job $jobFromContact): self
-    {
-        if ($this->jobFromContact->contains($jobFromContact)) {
-            $this->jobFromContact->removeElement($jobFromContact);
-            // set the owning side to null (unless already changed)
-            if ($jobFromContact->getJobContact() === $this) {
-                $jobFromContact->setJobContact(null);
-            }
-        }
-
-        return $this;
+        return null;
     }
 
     /**
-     * @return Collection|Rent[]
+     * Removes sensitive data from the user.
+     *
+     * {@inheritdoc}
      */
-    public function getRentsFromUser(): Collection
-    {
-        return $this->rentsFromUser;
+    public function eraseCredentials(): void {
+        // Nous n'avons pas besoin de cette methode car nous n'utilions pas de plainPassword
+        // Mais elle est obligatoire car comprise dans l'interface UserInterface
+        // $this->plainPassword = null;
     }
 
-    public function addRentsFromUser(Rent $rentsFromUser): self
-    {
-        if (!$this->rentsFromUser->contains($rentsFromUser)) {
-            $this->rentsFromUser[] = $rentsFromUser;
-            $rentsFromUser->setRentAuthor($this);
-        }
-
-        return $this;
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize(): string {
+        return serialize([$this->id, $this->username, $this->password]);
     }
 
-    public function removeRentsFromUser(Rent $rentsFromUser): self
-    {
-        if ($this->rentsFromUser->contains($rentsFromUser)) {
-            $this->rentsFromUser->removeElement($rentsFromUser);
-            // set the owning side to null (unless already changed)
-            if ($rentsFromUser->getRentAuthor() === $this) {
-                $rentsFromUser->setRentAuthor(null);
-            }
-        }
-
-        return $this;
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized): void {
+        [$this->id, $this->username, $this->password] = unserialize($serialized, ['allowed_classes' => false]);
     }
 
-    public function getUserRole(): ?Role
-    {
-        return $this->userRole;
-    }
-
-    public function setUserRole(?Role $userRole): self
-    {
-        $this->userRole = $userRole;
-
-        return $this;
-    }
-    
-    public function __toString(){
-        return $this->username;
-    }
 }
