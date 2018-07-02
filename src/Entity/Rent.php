@@ -67,6 +67,12 @@ class Rent
      */
     private $rentPlace;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="rentsfromusers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $rentContact;
+
     public function getId()
     {
         return $this->id;
@@ -165,6 +171,18 @@ class Rent
     public function setRentPlace(?Place $rentPlace): self
     {
         $this->rentPlace = $rentPlace;
+
+        return $this;
+    }
+
+    public function getRentContact(): ?User
+    {
+        return $this->rentContact;
+    }
+
+    public function setRentContact(?User $rentContact): self
+    {
+        $this->rentContact = $rentContact;
 
         return $this;
     }

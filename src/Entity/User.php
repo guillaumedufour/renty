@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -63,6 +65,22 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="json")
      */
     private $roles = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Rent", mappedBy="rentContact", orphanRemoval=true)
+     */
+    private $rentsfromusers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Job", mappedBy="jobContact", orphanRemoval=true)
+     */
+    private $jobsfromuser;
+
+    public function __construct()
+    {
+        $this->rentsfromusers = new ArrayCollection();
+        $this->jobsfromuser = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -170,5 +188,72 @@ class User implements UserInterface, \Serializable
     public function unserialize($serialized): void
     {
         [$this->id, $this->username, $this->password] = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    /**
+     * @return Collection|Rent[]
+     */
+    public function getRentsfromusers(): Collection
+    {
+        return $this->rentsfromusers;
+    }
+
+    public function addRentsfromuser(Rent $rentsfromuser): self
+    {
+        if (!$this->rentsfromusers->contains($rentsfromuser)) {
+            $this->rentsfromusers[] = $rentsfromuser;
+            $rentsfromuser->setRentContact($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRentsfromuser(Rent $rentsfromuser): self
+    {
+        if ($this->rentsfromusers->contains($rentsfromuser)) {
+            $this->rentsfromusers->removeElement($rentsfromuser);
+            // set the owning side to null (unless already changed)
+            if ($rentsfromuser->getRentContact() === $this) {
+                $rentsfromuser->setRentContact(null);
+            }
+        }
+
+        return $this;
+    }
+    
+    public function __toString(){
+        return $this->email;
+ 
+    }
+
+    /**
+     * @return Collection|Job[]
+     */
+    public function getJobsfromuser(): Collection
+    {
+        return $this->jobsfromuser;
+    }
+
+    public function addJobsfromuser(Job $jobsfromuser): self
+    {
+        if (!$this->jobsfromuser->contains($jobsfromuser)) {
+            $this->jobsfromuser[] = $jobsfromuser;
+            $jobsfromuser->setJobContact($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJobsfromuser(Job $jobsfromuser): self
+    {
+        if ($this->jobsfromuser->contains($jobsfromuser)) {
+            $this->jobsfromuser->removeElement($jobsfromuser);
+            // set the owning side to null (unless already changed)
+            if ($jobsfromuser->getJobContact() === $this) {
+                $jobsfromuser->setJobContact(null);
+            }
+        }
+
+        return $this;
     }
 }

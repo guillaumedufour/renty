@@ -9,6 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Job
 {
+    
+        public function __construct()
+{
+    $this->jobDateBegin = new \DateTime('now');
+   
+}
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -54,6 +60,12 @@ class Job
      * @ORM\JoinColumn(nullable=false)
      */
     private $jobSector;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="jobsfromuser")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $jobContact;
 
     public function getId()
     {
@@ -141,6 +153,18 @@ class Job
     public function setJobSector(?SectorArea $jobSector): self
     {
         $this->jobSector = $jobSector;
+
+        return $this;
+    }
+
+    public function getJobContact(): ?User
+    {
+        return $this->jobContact;
+    }
+
+    public function setJobContact(?User $jobContact): self
+    {
+        $this->jobContact = $jobContact;
 
         return $this;
     }
