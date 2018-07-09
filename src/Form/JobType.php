@@ -18,6 +18,7 @@ class JobType extends AbstractType {
                 ->add('housed')
                 ->add('jobPlace')
                 ->add('jobSector')
+                ->add('jobContact')
         ;
     }
 

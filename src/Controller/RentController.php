@@ -31,17 +31,15 @@ class RentController extends Controller {
         public function new(Request $request): Response
         {
         
-        
-        
-        $rent = new Rent();
+            $rent = new Rent();
 
-        $form = $this->createForm(RentType::class, $rent);
-        $form->handleRequest($request);
+            $form = $this->createForm(RentType::class, $rent);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($rent);
-            $em->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($rent);
+                $em->flush();
 
             return $this->redirectToRoute('rent_index');
         }
@@ -50,7 +48,7 @@ class RentController extends Controller {
                     'rent' => $rent,
                     'form' => $form->createView(),
         ]);
-    }
+        }
 
     /**
      * @Route("/{id}", name="rent_show", methods="GET")

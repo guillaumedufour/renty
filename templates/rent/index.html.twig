@@ -10,8 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>titre</th>
+                <th>lieu</th>
                 <th>posté le</th>
-                <th>Dispo</th>
                 <th>loyer m.</th>
                 <th>surface</th>
                 <th>meublé ?</th>
@@ -23,8 +23,8 @@
             <tr>
                 <td>{{ rent.id }}</td>
                 <td>{{ rent.rentTitle }}</td>
+                <td>{{ rent.rentPlace}}</td>
                 <td>{{ rent.rentDatePost ? rent.rentDatePost|date('d/m/Y') : '' }}</td>
-                <td>{{ rent.dispoDate ? rent.dispoDate|date('d/m/Y') : '' }}</td>
                 <td>{{ rent.monthCost }}</td>
                 <td>{{ rent.rentSurface }}</td>
                 <td>{{ rent.furnished ? 'oui' : 'non' }}</td>

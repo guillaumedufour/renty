@@ -4,8 +4,6 @@
     <div class="container">
         {% if error %}
             <div class="alert alert-danger">
-
-
                 {{ error.messageKey }}
             </div>
         {% endif %}
@@ -25,7 +23,7 @@
                                 <input type="password" id="password" name="_password" class="form-control" />
                             </div>
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-lg btn-block btn-primary">
                                 <i class="fa fa-sign-in" aria-hidden="true"></i> Connexion
                             </button>
                         </fieldset>
@@ -34,4 +32,5 @@
             </div>
 
         </div>
+    </div>
     {% endblock %}
