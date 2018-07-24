@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RentRepository")
  */
@@ -12,7 +13,8 @@ class Rent
 {
     public function __construct()
 {
-    $this->rentDatePost = new \DateTime('now');
+
+    //$this->rentDatePost = new \DateTime('now');
     $this->dispoDate = new \DateTime('now');
 }
     

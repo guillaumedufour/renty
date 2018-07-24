@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * @Route("/job")
@@ -25,10 +27,14 @@ class JobController extends Controller
 
     /**
      * @Route("/new", name="job_new", methods="GET|POST")
+     * @Security("has_role('ROLE_USER')or has_role('ROLE_ADMIN')")
      */
-    public function new(Request $request): Response
+    public function new( Request $request): Response
     {
+        
         $job = new Job();
+        $job->setJobContact($this->getUser());
+        $job->setJobDatePost(new \DateTime('now'));
         $form = $this->createForm(JobType::class, $job);
         $form->handleRequest($request);
 
@@ -56,6 +62,7 @@ class JobController extends Controller
 
     /**
      * @Route("/{id}/edit", name="job_edit", methods="GET|POST")
+     * @Security("has_role('ROLE_USER')or has_role('ROLE_ADMIN')")
      */
     public function edit(Request $request, Job $job): Response
     {
@@ -76,6 +83,7 @@ class JobController extends Controller
 
     /**
      * @Route("/{id}", name="job_delete", methods="DELETE")
+     * @Security("has_role('ROLE_USER')or has_role('ROLE_ADMIN')")
      */
     public function delete(Request $request, Job $job): Response
     {

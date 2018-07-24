@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block body %}
+
+
+    <div class="container">
+
+        <h1>Bienvenue sur votre espace {{ app.user.username }}</h1>
+        <h2> vos annonces de locations </h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>titre</th>
+                    <th>lieu</th>
+                    <th>posté le</th>
+                    <th>loyer m.</th>
+                    <th>surface</th>
+                    <th>meublé ?</th>
+                    <th>actions </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for rent in rents%}
+                    {% if id == rent.rentContact.id  %}
+                        <tr>
+                            <td>{{ rent.id }}</td>
+                            <td>{{ rent.rentTitle }}</td>
+                            <td>{{ rent.rentPlace}}</td>
+                            <td>{{ rent.rentDatePost ? rent.rentDatePost|date('d/m/Y') : '' }}</td>
+                            <td>{{ rent.monthCost }}</td>
+                            <td>{{ rent.rentSurface }}</td>
+                            <td>{{ rent.furnished ? 'oui' : 'non' }}</td>
+                            <td>
+                                <a href="{{ path('rent_show', {'id': rent.id}) }}">voir</a>
+                                <a href="{{ path('rent_edit', {'id': rent.id}) }}">editer</a>
+                            </td>
+                        </tr>
+
+                   
+                    {% endif %} 
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2> vos annonces d'emploi </h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>titre</th>
+                    <th>Lieu</th>
+                    <th>début</th>
+                    <th>salaire m.</th>
+                    <th>logé?</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for job in jobs %}
+                    {% if id == job.jobContact.id  %}
+
+                        <tr>
+                            <td>{{ job.id }}</td>
+                            <td>{{ job.jobTitle }}</td>
+                            <td>{{ job.jobPlace }}</td>
+                            <td>{{ job.jobDateBegin ? job.jobDateBegin|date('d/m/Y') : '' }}</td>
+                            <td>{{ job.jobWages }}</td>
+                            <td>{{ job.housed ? 'oui' : 'pas encore' }}</td>
+                            <td>
+                                <a href="{{ path('job_show', {'id': job.id}) }}">voir</a>
+                                <a href="{{ path('job_edit', {'id': job.id}) }}">editer</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">pas encore d'annonces d'emploi</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+
+        <a href="{{ path('rent_new') }}">Créer une nouvelle location</a> ou
+        <a href="{{ path('job_new')}}">Créer une annonce d'emploi</a>
+
+
+    </div>
+
+{% endblock %}

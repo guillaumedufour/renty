@@ -15,29 +15,29 @@
                 <th>loyer m.</th>
                 <th>surface</th>
                 <th>meublé ?</th>
-                <th>actions</th>
+               
             </tr>
         </thead>
         <tbody>
-        {% for rent in rents %}
-            <tr>
-                <td>{{ rent.id }}</td>
-                <td>{{ rent.rentTitle }}</td>
-                <td>{{ rent.rentPlace}}</td>
-                <td>{{ rent.rentDatePost ? rent.rentDatePost|date('d/m/Y') : '' }}</td>
-                <td>{{ rent.monthCost }}</td>
-                <td>{{ rent.rentSurface }}</td>
-                <td>{{ rent.furnished ? 'oui' : 'non' }}</td>
-                <td>
-                    <a href="{{ path('rent_show', {'id': rent.id}) }}">voir</a>
-                    <a href="{{ path('rent_edit', {'id': rent.id}) }}">editer</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">pas encore d'annonce recensée</td>
-            </tr>
-        {% endfor %}
+            {% for rent in rents %}
+                <tr>
+                    <td>{{ rent.id }}</td>
+                    <td><a href="{{ path('rent_show', {'id': rent.id}) }}">{{ rent.rentTitle }}</a></td>
+                    <td>{{ rent.rentPlace}}</td>
+                    <td>{{ rent.rentDatePost ? rent.rentDatePost|date('d/m/Y') : '' }}</td>
+                    <td>{{ rent.monthCost }}</td>
+                    <td>{{ rent.rentSurface }}</td>
+                    <td>{{ rent.furnished ? 'oui' : 'non' }}</td>
+                    <!--<td>
+                        <a href="{{ path('rent_show', {'id': rent.id}) }}">voir</a>
+                        <a href="{{ path('rent_edit', {'id': rent.id}) }}">editer</a>
+                    </td>-->
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">pas encore d'annonce recensée</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 

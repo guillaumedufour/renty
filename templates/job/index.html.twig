@@ -10,25 +10,27 @@
                 <th>Id</th>
                 <th>titre</th>
                 <th>Lieu</th>
+                <th>Posté le</th>
                 <th>début</th>
                 <th>salaire m.</th>
                 <th>logé?</th>
-                <th>actions</th>
+                
             </tr>
         </thead>
         <tbody>
             {% for job in jobs %}
                 <tr>
                     <td>{{ job.id }}</td>
-                    <td>{{ job.jobTitle }}</td>
+                    <td><a href="{{ path('job_show', {'id': job.id}) }}">{{ job.jobTitle }}</a></td>
                     <td>{{ job.jobPlace }}</td>
+                    <td>{{ job.jobDatePost ? job.jobDatePost|date('d/m/Y') : '' }}</td>
                     <td>{{ job.jobDateBegin ? job.jobDateBegin|date('d/m/Y') : '' }}</td>
                     <td>{{ job.jobWages }}</td>
                     <td>{{ job.housed ? 'oui' : 'pas encore' }}</td>
                     <td>
-                        <a href="{{ path('job_show', {'id': job.id}) }}">voir </a>
+                       <!-- <a href="{{ path('job_show', {'id': job.id}) }}">voir </a>
                         <a href="{{ path('job_edit', {'id': job.id}) }}">editer</a>
-                    </td>
+                    </td>-->
                 </tr>
             {% else %}
                 <tr>

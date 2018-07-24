@@ -9,7 +9,7 @@
         {% endif %}
         
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-12">
                 <div class="well">
                     <form action="{{ path('security_login') }}" method="post">
                         <fieldset>
@@ -28,6 +28,7 @@
                             </button>
                         </fieldset>
                     </form>
+                            <a href="{{path('user_registration')}}">Pas encore inscrit ? ça se passe ici !</a>
                 </div>
             </div>
 

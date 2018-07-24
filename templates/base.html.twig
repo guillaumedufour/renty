@@ -1,3 +1,6 @@
+{% if app.user %}
+    {% set id = app.user.id %}
+{% endif %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,7 +9,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png" />
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{% block title %}{% endblock %}</title>
+        <title>Renty - {% block title %}{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="/css/bootstrap.min.css">
             <link rel="stylesheet" href="/css/renty.css"/>
@@ -20,11 +23,11 @@
                 <a class="p-2 text-light" href="{{ path('rent_index')}}">Locations</a>
                 <a class="p-2 text-light" href="{{ path('job_index')}}">Jobs</a>
                 {% if app.user %}
-                    <a class="p-2 text-light" >bienvenue {{app.user.username }}</a>
-                    <a class="p-2 text-light" href="{{ path('security_logout')}}">déconnexion</a>
+                    <a class="p-2 text-light"href="{{path('moncompte')}}" >Bienvenue {{app.user.username }}</a>
+                    <a class="p-2 text-light" href="{{ path('security_logout')}}">Déconnexion</a>
                 {% else %}
-                    <a class="p-2 text-light" href="{{ path('user_registration')}}">inscription</a>
-                    <a class="p-2 text-light" href="{{ path('security_login')}}">connexion</a>
+                    <a class="p-2 text-light" href="{{ path('user_registration')}}">Inscription</a>
+                    <a class="p-2 text-light" href="{{ path('security_login')}}">Connexion</a>
                 {% endif %}
 
             </nav>
@@ -68,6 +71,7 @@
                     </div>
                 </div>
             </div>
+
         </footer>
 
 
@@ -78,6 +82,7 @@
         <script src="/js/jquery-3.3.1.js"></script>
         <script src="/js/popper.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script> 
     {% endblock %}
 </body>
 </html>

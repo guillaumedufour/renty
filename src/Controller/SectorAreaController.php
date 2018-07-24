@@ -37,7 +37,7 @@ class SectorAreaController extends Controller
             $em->persist($sectorArea);
             $em->flush();
 
-            return $this->redirectToRoute('sector_area_index');
+            return $this->redirectToRoute('job_index');
         }
 
         return $this->render('sector_area/new.html.twig', [

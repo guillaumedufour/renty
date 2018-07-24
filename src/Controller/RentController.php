@@ -9,7 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * @Route("/rent")
@@ -27,12 +28,14 @@ class RentController extends Controller {
 
         /**
          * @Route("/new", name="rent_new", methods="GET|POST")
+         * @Security("has_role('ROLE_USER')or has_role('ROLE_ADMIN')")
          */
         public function new(Request $request): Response
         {
         
             $rent = new Rent();
-
+            $rent->setRentContact($this->getUser());
+            $rent->setRentDatePost(new \DateTime('now'));
             $form = $this->createForm(RentType::class, $rent);
             $form->handleRequest($request);
 
@@ -59,6 +62,7 @@ class RentController extends Controller {
 
     /**
      * @Route("/{id}/edit", name="rent_edit", methods="GET|POST")
+     * @Security("has_role('ROLE_USER')or has_role('ROLE_ADMIN')")
      */
     public function edit(Request $request, Rent $rent): Response {
         $form = $this->createForm(RentType::class, $rent);
@@ -78,6 +82,7 @@ class RentController extends Controller {
 
     /**
      * @Route("/{id}", name="rent_delete", methods="DELETE")
+     * @Security("has_role('ROLE_USER')or has_role('ROLE_ADMIN')")
      */
     public function delete(Request $request, Rent $rent): Response {
         if ($this->isCsrfTokenValid('delete' . $rent->getId(), $request->request->get('_token'))) {
@@ -88,5 +93,7 @@ class RentController extends Controller {
 
         return $this->redirectToRoute('rent_index');
     }
+    
+   
 
 }

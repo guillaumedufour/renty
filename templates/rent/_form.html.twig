@@ -1,4 +1,6 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Publier') }}</button>
+{{ form_widget(form) }}
+
+<p> votre adresse de contact sera celle renseignée dans votre compte: {{app.user.email }}</p>
+<button class="btn">{{ button_label|default('Publier') }}</button>
 {{ form_end(form) }}

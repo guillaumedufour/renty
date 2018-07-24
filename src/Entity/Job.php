@@ -67,6 +67,11 @@ class Job
      */
     private $jobContact;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $jobDatePost;
+
     public function getId()
     {
         return $this->id;
@@ -165,6 +170,18 @@ class Job
     public function setJobContact(?User $jobContact): self
     {
         $this->jobContact = $jobContact;
+
+        return $this;
+    }
+
+    public function getJobDatePost(): ?\DateTimeInterface
+    {
+        return $this->jobDatePost;
+    }
+
+    public function setJobDatePost(\DateTimeInterface $jobDatePost): self
+    {
+        $this->jobDatePost = $jobDatePost;
 
         return $this;
     }
