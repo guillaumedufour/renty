@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 
 
@@ -74,6 +77,14 @@ class Rent
      * @ORM\JoinColumn(nullable=false)
      */
     private $rentContact;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Please, upload the rent picture as a JPEG file.")
+     * @Assert\File(mimeTypes={ "image/jpeg" })
+     */
+    private $picture;
 
     public function getId()
     {
@@ -185,6 +196,18 @@ class Rent
     public function setRentContact(?User $rentContact): self
     {
         $this->rentContact = $rentContact;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

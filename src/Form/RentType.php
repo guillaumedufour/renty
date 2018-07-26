@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
 class RentType extends AbstractType {
@@ -26,6 +27,7 @@ class RentType extends AbstractType {
                 ->add('rentSurface', IntegerType::class, array('label' => 'surface logement'))
                 ->add('furnished', CheckboxType::class, array('label' => 'meublé?', 'required' => false))
                 ->add('rentPlace')
+                ->add('picture', FileType::class,array('label'=>'image(JPEG file)'))
                
         ;
     }
