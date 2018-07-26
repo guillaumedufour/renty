@@ -79,3 +79,8 @@ h1{
     text-align: center;
     margin:25px auto;
 }
+img.rentimage{
+    max-width: 600px;
+    max-height:400px;
+    margin:0 auto;
+}

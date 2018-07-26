@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
 class JobType extends AbstractType {
@@ -22,10 +23,11 @@ class JobType extends AbstractType {
                 ->add('jobTitle', TextType::class, array('label' => 'titre de l\'annonce'))
                 ->add('jobContent', TextareaType::class, array('label' => 'description de l\'annonce'))
                 ->add('jobDateBegin', DateType::class, array('label' => 'date de commencement'))
-                ->add('jobWages', IntegerType::class, array('label' => 'loyer mensuel'))
+                ->add('jobWages', IntegerType::class, array('label' => 'salaire mensuel'))
                 ->add('housed', CheckboxType::class, array('label' => 'logé?', 'required' => false))
                 ->add('jobPlace')
                 ->add('jobSector')
+                ->add('picture', FileType::class, array('label' => 'Image (JPEG file)'))
            ;
     }
 

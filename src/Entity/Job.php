@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\JobRepository")
@@ -77,6 +78,26 @@ class Job
         return $this->id;
     }
 
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Veuillez séléctionner une image pour le job")
+     * @Assert\File(mimeTypes={ "image/jpeg" })
+     */
+    private $picture;
+
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    public function setpicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+    
     public function getJobTitle(): ?string
     {
         return $this->jobTitle;

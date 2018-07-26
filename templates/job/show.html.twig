@@ -5,11 +5,13 @@
 {% block body %}
     <div class="container">
         <h1>{{ job.jobTitle}}</h1>
-
+ <div class="row">
+            <img class="rentimage img-responsive" src="/uploads/pictures_directory/{{job.picture}}"alt="" title=""/>
+        </div>
         <table class="table">
             <tbody>
                 <tr>
-                    <th>Id</th>
+                    <th>N°Emploi</th>
                     <td>{{ job.id }}</td>
                 </tr>
                 <tr>
@@ -42,10 +44,12 @@
         </table>
 
         <a href="{{ path('job_index') }}">retour à la liste</a>
-        {% if id == job.jobContact.id  %}
-            <a href="{{ path('job_edit', {'id': job.id}) }}">editer</a>
+        {% if app.user%}
+            {% if id == job.jobContact.id  %}
+                <a href="{{ path('job_edit', {'id': job.id}) }}">editer</a>
 
-            {{ include('job/_delete_form.html.twig') }}
+                {{ include('job/_delete_form.html.twig') }}
+            {% endif %}
         {% endif %}
     </div>
 {% endblock %}

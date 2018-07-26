@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
+
 class RentType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
@@ -27,7 +28,10 @@ class RentType extends AbstractType {
                 ->add('rentSurface', IntegerType::class, array('label' => 'surface logement'))
                 ->add('furnished', CheckboxType::class, array('label' => 'meublé?', 'required' => false))
                 ->add('rentPlace')
-                ->add('picture', FileType::class,array('label'=>'image(JPEG file)'))
+                ->add('picture', FileType::class, array('label' => 'Image (JPEG file)'))
+                
+                
+                
                
         ;
     }

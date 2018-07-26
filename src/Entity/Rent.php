@@ -81,17 +81,30 @@ class Rent
     /**
      * @ORM\Column(type="string")
      *
-     * @Assert\NotBlank(message="Please, upload the rent picture as a JPEG file.")
+     * @Assert\NotBlank(message="Veuillez séléctionner une image pour l'annonce")
      * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $picture;
 
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    public function setpicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    
     public function getId()
     {
         return $this->id;
     }
 
-    public function getRentTitle(): ?string
+    public function getRentTitle()
     {
         return $this->rentTitle;
     }
@@ -103,7 +116,7 @@ class Rent
         return $this;
     }
 
-    public function getRentContent(): ?string
+    public function getRentContent()
     {
         return $this->rentContent;
     }
@@ -200,15 +213,5 @@ class Rent
         return $this;
     }
 
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?string $picture): self
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
+  
 }

@@ -38,23 +38,24 @@ class RentController extends Controller {
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-        // $file stores the uploaded PDF file
-        /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-        $file = $rent->getPicture();
+        // $file stores the uploaded jpeg file
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $rent->getPicture();
 
-        $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 
-        // moves the file to the directory where uploads are stored
-        $file->move(
-        $this->getParameter('pictures_directory'),
-        $fileName
-        );
+            // moves the file to the directory where brochures are stored
+            $file->move(
+                $this->getParameter('pictures_directory'),
+                $fileName
+            );
 
-        // updates the 'brochure' property to store the PDF file name
-        // instead of its contents
-        $rent->setPicture($fileName);
+            // updates the 'brochure' property to store the PDF file name
+            // instead of its contents
+            $rent->setPicture($fileName);
 
-        
+            // ... persist the $product variable or any other work
+
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($rent);
