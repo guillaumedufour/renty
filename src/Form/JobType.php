@@ -27,7 +27,7 @@ class JobType extends AbstractType {
                 ->add('housed', CheckboxType::class, array('label' => 'logé?', 'required' => false))
                 ->add('jobPlace')
                 ->add('jobSector')
-                ->add('picture', FileType::class, array('label' => 'Image (JPEG file)'))
+                ->add('picture', FileType::class, array('label' => 'Image (JPEG file)','data_class' => null,'required' => false))
            ;
     }
 

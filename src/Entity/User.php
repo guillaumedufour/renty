@@ -76,10 +76,16 @@ class User implements UserInterface, \Serializable
      */
     private $jobsfromuser;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="fkUserId", orphanRemoval=true)
+     */
+    private $articlesByUser;
+
     public function __construct()
     {
         $this->rentsfromusers = new ArrayCollection();
         $this->jobsfromuser = new ArrayCollection();
+        $this->articlesByUser = new ArrayCollection();
     }
 
     public function getId(): int
@@ -92,7 +98,7 @@ class User implements UserInterface, \Serializable
         $this->fullName = $fullName;
     }
 
-    // le ? signifie que cela peur aussi retourner null
+    // le ? signifie que cela peut aussi retourner null
     public function getFullName(): ?string
     {
         return $this->fullName;
@@ -250,6 +256,37 @@ class User implements UserInterface, \Serializable
             // set the owning side to null (unless already changed)
             if ($jobsfromuser->getJobContact() === $this) {
                 $jobsfromuser->setJobContact(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticlesByUser(): Collection
+    {
+        return $this->articlesByUser;
+    }
+
+    public function addArticlesByUser(Article $articlesByUser): self
+    {
+        if (!$this->articlesByUser->contains($articlesByUser)) {
+            $this->articlesByUser[] = $articlesByUser;
+            $articlesByUser->setFkUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticlesByUser(Article $articlesByUser): self
+    {
+        if ($this->articlesByUser->contains($articlesByUser)) {
+            $this->articlesByUser->removeElement($articlesByUser);
+            // set the owning side to null (unless already changed)
+            if ($articlesByUser->getFkUserId() === $this) {
+                $articlesByUser->setFkUserId(null);
             }
         }
 

@@ -13,17 +13,23 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="/css/bootstrap.min.css">
             <link rel="stylesheet" href="/css/renty.css"/>
+            <link rel="stylesheet" href="/css/bootstrap-table.css"/>
+
         {% endblock %}
+
     </head>
     <body>
-
+        <script> $(document).ready(function () {
+                $('#tableau').DataTable();
+            });</script>
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom box-shadow">
             <a class="logo my-0 mr-md-auto font-weight-normal" href="{{path('index')}}"><img class="logo my-0 mr-md-auto font-weight-normal" src="/img/logorenty1.png" alt="logo renty" title="logo renty"></a>
-            <nav class="my-2 my-md-0 mr-md-3">
+            <nav class="my-2 my-md-0 mr-m           d-3">
                 <a class="p-2 text-light" href="{{ path('rent_index')}}">Locations</a>
                 <a class="p-2 text-light" href="{{ path('job_index')}}">Jobs</a>
+                <a class="p-2 text-light" href="{{ path('article_index')}}">Actualités</a>
                 {% if app.user %}
-                    <a class="p-2 text-light"href="{{path('moncompte')}}" >Bienvenue {{app.user.username }}</a>
+                    <a class="p-2 text-light"href="{{path('moncompte')}}" >Bienvenue {{app.user                                      .username }}</a>
                     <a class="p-2 text-light" href="{{ path('security_logout')}}">Déconnexion</a>
                 {% else %}
                     <a class="p-2 text-light" href="{{ path('user_registration')}}">Inscription</a>
@@ -56,7 +62,7 @@
                         <h5>à propos</h5>
                         <ul class="list-unstyled text-small">
                             <li><a class="text-muted" href="#">Qui sommes nous ?</a></li>
-                            <li><a class="text-muted" href="#">Notre devise</a></li>
+                            <li><a href="{{ path('article_index')}}" class="text-muted" href="#">Actualités</a></li>
                             <li><a class="text-muted" href="#">Contact</a></li>
 
                         </ul>
@@ -78,11 +84,16 @@
     {% endblock %}
     {% block javascripts %}
         <!-- Optional JavaScript -->
+
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="/js/jquery-3.3.1.js"></script>
         <script src="/js/popper.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script> 
+        <script src="/js/bootstrap-table.js"></script>
+        <script src="/js/bootstrap-table-fr-FR.js"></script>
+
+
+
     {% endblock %}
 </body>
 </html>

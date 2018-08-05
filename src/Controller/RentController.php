@@ -27,9 +27,8 @@ class RentController extends Controller {
          * @Route("/new", name="rent_new", methods="GET|POST")
          * @Security("has_role('ROLE_USER')or has_role('ROLE_ADMIN')")
          */
-        public function new(Request $request): Response
+    public function new(Request $request): Response
         {
-
         $rent = new Rent();
         $rent->setRentContact($this->getUser());
         $rent->setRentDatePost(new \DateTime('now'));
@@ -38,24 +37,20 @@ class RentController extends Controller {
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-        // $file stores the uploaded jpeg file
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $file = $rent->getPicture();
+        // $file contient le fichier jpeg uploadé
+        $file = $rent->getPicture();
 
-            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+        $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 
-            // moves the file to the directory where brochures are stored
-            $file->move(
-                $this->getParameter('pictures_directory'),
-                $fileName
-            );
+        // déplace le fichier le fichier jusqu'au dossier des images stockées
+        $file->move(
+        $this->getParameter('pictures_directory'),
+        $fileName
+        );
 
-            // updates the 'brochure' property to store the PDF file name
-            // instead of its contents
-            $rent->setPicture($fileName);
-
-            // ... persist the $product variable or any other work
-
+        // met à jour la propriété picture avec le nom du fichier jpeg
+        // et non son contenu
+        $rent->setPicture($fileName);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($rent);
@@ -86,7 +81,24 @@ class RentController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            // $file contient le fichier jpeg uploadé
+
+            $file = $rent->getPicture();
+
+            $fileName = $this->generateUniqueFileName() . '.' . $file->guessExtension();
+
+            // déplace le fichier le fichier jusqu'au dossier des images stockées
+            $file->move(
+                    $this->getParameter('pictures_directory'), $fileName
+            );
+
+            // met à jour la propriété picture avec le nom du fichier jpeg
+            // et non son contenu
+            $rent->setPicture($fileName);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($rent);
+            $em->flush();
 
             return $this->redirectToRoute('rent_edit', ['id' => $rent->getId()]);
         }

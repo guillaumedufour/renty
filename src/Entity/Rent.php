@@ -81,7 +81,7 @@ class Rent
     /**
      * @ORM\Column(type="string")
      *
-     * @Assert\NotBlank(message="Veuillez séléctionner une image pour l'annonce")
+     * @Assert\NotBlank(message="Veuillez selectionner une image pour l'annonce")
      * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $picture;

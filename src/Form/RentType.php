@@ -28,7 +28,7 @@ class RentType extends AbstractType {
                 ->add('rentSurface', IntegerType::class, array('label' => 'surface logement'))
                 ->add('furnished', CheckboxType::class, array('label' => 'meublé?', 'required' => false))
                 ->add('rentPlace')
-                ->add('picture', FileType::class, array('label' => 'Image (JPEG file)'))
+                ->add('picture', FileType::class, array('label' => 'Image (JPEG file)','data_class' => null,'required' => false))
                 
                 
                 

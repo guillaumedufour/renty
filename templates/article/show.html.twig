@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{article.ArticleTitle }}</h1>
+        <div class="row">
+            <img class="rentimage img-responsive" src="/uploads/pictures_directory/{{article.articlePicture}}"alt="" title=""/> 
+        </div>
+        <p> posté le: {{article.articleDate ? article.articleDate|date('d-m-Y') : '' }} par {{ article.fkUserId.username }} </p>
+        <p>{{ article.ArticleDescription|nl2br }}</p>
+        <a href="{{ path('article_index') }}">retour à la liste</a>
+
+
+    </div>
+
+{% endblock %}

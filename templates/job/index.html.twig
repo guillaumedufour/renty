@@ -4,17 +4,17 @@
 
 {% block body %}
 
-    <table class="table">
+    <table data-pagination="true" data-search="true" data-toggle="table" class="display table table-striped table-bordered">
         <thead>
             <tr>
-                <th>N°Emploi</th>
-                <th>Titre</th>
-                <th>Lieu</th>
-                <th>Posté le</th>
-                <th>Début le</th>
-                <th>Salaire m.</th>
-                <th>Logé?</th>
-                
+                <th data-sortable="true">N°Emploi</th>
+                <th data-sortable="true">Titre</th>
+                <th data-sortable="true">Lieu</th>
+                <th data-sortable="true">Posté le</th>
+                <th data-sortable="true">Début le</th>
+                <th data-sortable="true">Salaire m.</th>
+                <th data-sortable="true">Logé?</th>
+
             </tr>
         </thead>
         <tbody>
@@ -27,8 +27,8 @@
                     <td>{{ job.jobDateBegin ? job.jobDateBegin|date('d/m/Y') : '' }}</td>
                     <td>{{ job.jobWages }}</td>
                     <td>{{ job.housed ? 'oui' : 'pas encore' }}</td>
-                    <td>
-                       <!-- <a href="{{ path('job_show', {'id': job.id}) }}">voir </a>
+                   <!--  <td>
+                       <a href="{{ path('job_show', {'id': job.id}) }}">voir </a>
                         <a href="{{ path('job_edit', {'id': job.id}) }}">editer</a>
                     </td>-->
                 </tr>

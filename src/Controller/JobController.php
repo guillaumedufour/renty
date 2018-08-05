@@ -38,23 +38,21 @@ class JobController extends Controller {
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-        // $file stores the uploaded jpeg file
+     // $file contient le fichier jpeg uploadé
         /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
         $file = $job->getPicture();
 
         $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 
-        // moves the file to the directory where brochures are stored
+        // déplace le fichier le fichier jusqu'au dossier des images stockées
         $file->move(
         $this->getParameter('pictures_directory'),
         $fileName
         );
 
-        // updates the 'brochure' property to store the PDF file name
-        // instead of its contents
+        // met à jour la propriété picture avec le nom du fichier jpeg
+            // et non son contenu
         $job->setPicture($fileName);
-
-        // ... persist the $product variable or any other work
 
 
         $em = $this->getDoctrine()->getManager();

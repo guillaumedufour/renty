@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Derniers Articles{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Quoi de neuf chez Renty ?</h1>
+<div class="row">
+        {% for article in articles %}
+            <div class='article'>
+                <img class="gridimage img-responsive" src="/uploads/pictures_directory/{{article.articlePicture}}"alt="" title=""/> 
+                <h3>{{ article.articleTitle }}</h3>
+                    <p> posté le: {{article.articleDate ? article.articleDate|date('d-m-Y') : '' }} par {{ article.fkUserId.username }} </p>
+                    <a href="{{ path('article_show', {'id': article.id}) }}"> <button class="btn btn-lg btn-block btn-primary">lire plus</button></a> 
+
+
+            </div>
+        {% else %}
+
+
+
+        {% endfor %}
+
+</div>
+
+    </div>
+{% endblock %} 

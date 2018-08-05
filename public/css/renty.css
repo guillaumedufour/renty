@@ -84,3 +84,13 @@ img.rentimage{
     max-height:400px;
     margin:0 auto;
 }
+div.article{
+    width:301px;
+    border:1px solid black;
+    text-align: center;
+    margin:10px auto;
+}
+img.gridimage{
+    max-width:300px;
+    max-height:200px;
+}
