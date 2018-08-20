@@ -9,7 +9,10 @@ html {
         font-size: 16px;
     }
 }
-
+a:hover{
+    color:black;
+    text-decoration: none;
+}
 .container {
     max-width: 960px;
 }
@@ -31,7 +34,7 @@ img.logo{
 }
 footer img{
     max-width: 150px;
-    margin-top:-15px;
+    
 }
 
 .btn-primary{
@@ -60,16 +63,10 @@ footer img{
 
 .btn:hover{
     background-color:#343a40;
-    border-color:#343a40;
+    border: 1px solid #343a40;
     color:white;
 }
 
-a{
-    color:#ea844b;
-}
-a:hover{
-    color:#343a40;
-}
 
 textarea{
     min-height: 300px;
@@ -82,7 +79,7 @@ h1{
 img.rentimage{
     max-width: 600px;
     max-height:400px;
-    margin:0 auto;
+    margin:3% auto;
 }
 div.article{
     width:301px;
@@ -93,4 +90,21 @@ div.article{
 img.gridimage{
     max-width:300px;
     max-height:200px;
+}
+label.rgpd{
+    margin-left:1%;
+}
+a.blocUser{
+    color:#ea844b;
+}
+a{
+    text-decoration: none;
+    color:black;
+}
+
+.sideads{
+    max-width: 290px;
+}
+h4.side{
+    margin:5% auto;
 }

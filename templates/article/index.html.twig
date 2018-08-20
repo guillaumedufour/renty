@@ -7,7 +7,7 @@
         <h1>Quoi de neuf chez Renty ?</h1>
 <div class="row">
         {% for article in articles %}
-            <div class='article'>
+            <div class=' card article box-shadow'>
                 <img class="gridimage img-responsive" src="/uploads/pictures_directory/{{article.articlePicture}}"alt="" title=""/> 
                 <h3>{{ article.articleTitle }}</h3>
                     <p> posté le: {{article.articleDate ? article.articleDate|date('d-m-Y') : '' }} par {{ article.fkUserId.username }} </p>

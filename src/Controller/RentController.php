@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Repository\JobRepository;
 
 /**
  * @Route("/rent")
@@ -27,7 +28,7 @@ class RentController extends Controller {
          * @Route("/new", name="rent_new", methods="GET|POST")
          * @Security("has_role('ROLE_USER')or has_role('ROLE_ADMIN')")
          */
-    public function new(Request $request): Response
+        public function new(Request $request): Response
         {
         $rent = new Rent();
         $rent->setRentContact($this->getUser());
@@ -68,8 +69,8 @@ class RentController extends Controller {
     /**
      * @Route("/{id}", name="rent_show", methods="GET")
      */
-    public function show(Rent $rent): Response {
-        return $this->render('rent/show.html.twig', ['rent' => $rent]);
+    public function show(Rent $rent, JobRepository $jobRepository ): Response {
+        return $this->render('rent/show.html.twig', ['rent' => $rent,'jobs' => $jobRepository->findAll()]);
     }
 
     /**

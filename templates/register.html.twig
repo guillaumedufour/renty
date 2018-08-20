@@ -10,6 +10,7 @@
         {{ form_row(form.email) }}
         {{ form_row(form.password.first) }}
         {{ form_row(form.password.second) }}
+        <input type="checkbox" required><label class="rgpd">En cochant cette case, j'accepte les conditions d'utilisations de Renty (<a href="" target="_blank"> voir nos conditions générales d'utilisation</a>)</label>
 
         <button class="btn btn-lg btn-block btn-primary" type="submit">S'inscrire !</button>
         {{ form_end(form) }}

@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Place;
 
 
 
@@ -26,13 +28,9 @@ class RentType extends AbstractType {
                 ->add('dispoDate', DateType::class, array('label' => 'date de disponibilité'))
                 ->add('monthCost', IntegerType::class, array('label' => 'loyer mensuel'))
                 ->add('rentSurface', IntegerType::class, array('label' => 'surface logement'))
-                ->add('furnished', CheckboxType::class, array('label' => 'meublé?', 'required' => false))
-                ->add('rentPlace')
-                ->add('picture', FileType::class, array('label' => 'Image (JPEG file)','data_class' => null,'required' => false))
-                
-                
-                
-               
+                ->add('furnished', CheckboxType::class, array('label' => 'le logement est il meublé?', 'required' => false))
+                ->add('rentPlace', EntityType::class,array('class'=>Place::class, 'label'=>'Ville / Village / Station'))
+                ->add('picture', FileType::class, array('label' => 'veuillez télécharger une image d\'illustation','data_class' => null,'required' => false))
         ;
     }
 

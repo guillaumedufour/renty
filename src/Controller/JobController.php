@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Rent;
 
 /**
  * @Route("/job")
@@ -21,7 +22,12 @@ class JobController extends Controller {
      */
     public function index(JobRepository $jobRepository): Response {
         return $this->render('job/index.html.twig', ['jobs' => $jobRepository->findAll()]);
-        }
+    }
+
+    /**
+     * @Route("/localjobs", name="job_local", methods="GET")
+     */
+   
 
         /**
          * @Route("/new", name="job_new", methods="GET|POST")
@@ -38,7 +44,7 @@ class JobController extends Controller {
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-     // $file contient le fichier jpeg uploadé
+        // $file contient le fichier jpeg uploadé
         /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
         $file = $job->getPicture();
 
@@ -51,7 +57,7 @@ class JobController extends Controller {
         );
 
         // met à jour la propriété picture avec le nom du fichier jpeg
-            // et non son contenu
+        // et non son contenu
         $job->setPicture($fileName);
 
 

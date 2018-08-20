@@ -19,22 +19,22 @@
 
     </head>
     <body>
-        <script> $(document).ready(function () {
-                $('#tableau').DataTable();
-            });</script>
+
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom box-shadow">
             <a class="logo my-0 mr-md-auto font-weight-normal" href="{{path('index')}}"><img class="logo my-0 mr-md-auto font-weight-normal" src="/img/logorenty1.png" alt="logo renty" title="logo renty"></a>
-            <nav class="my-2 my-md-0 mr-m           d-3">
+            <nav class="my-2 my-md-0 mr-md-3">
                 <a class="p-2 text-light" href="{{ path('rent_index')}}">Locations</a>
                 <a class="p-2 text-light" href="{{ path('job_index')}}">Jobs</a>
                 <a class="p-2 text-light" href="{{ path('article_index')}}">Actualités</a>
+
                 {% if app.user %}
-                    <a class="p-2 text-light"href="{{path('moncompte')}}" >Bienvenue {{app.user                                      .username }}</a>
-                    <a class="p-2 text-light" href="{{ path('security_logout')}}">Déconnexion</a>
+                    <a class="p-2 blocUser"href="{{path('moncompte')}}" >Bienvenue {{app.user                                      .username }}</a>
+                    <a class="p-2 blocUser" href="{{ path('security_logout')}}">Déconnexion</a>
                 {% else %}
-                    <a class="p-2 text-light" href="{{ path('user_registration')}}">Inscription</a>
-                    <a class="p-2 text-light" href="{{ path('security_login')}}">Connexion</a>
+                    <a class="p-2 blocUser" href="{{ path('user_registration')}}">Inscription</a>
+                    <a class="p-2 blocUser" href="{{ path('security_login')}}">Connexion</a>
                 {% endif %}
+
 
             </nav>
         </div>
@@ -47,7 +47,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-md img-center">
-                        <a href="{{ path('index')}}"><img class="img-responsive" src="/img/logorenty2.png" alt="logo renty" title="logo renty"></a>
+                        <a href="{{ path('index')}}"><img class="img-responsive" src="/img/logorenty1.png" alt="logo renty" title="logo renty"></a>
                     </div>
                     <div class="col-6 col-md">
                         <h5>rapide et facile !</h5>

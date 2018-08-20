@@ -3,10 +3,11 @@
 {% block title %}{{ rent.rentTitle }}{% endblock %}
 
 {% block body %}
+
     <div class="container">
-        <h1>{{ rent.rentTitle }}</h1>
+        <h1>{{ rent.rentTitle }} , à {{ rent.rentPlace}} </h1>
         <div class="row">
-            <img class="rentimage img-responsive" src="/uploads/pictures_directory/{{rent.picture}}"alt="" title=""/>
+            <img class="rentimage img-responsive shadow" src="/uploads/pictures_directory/{{rent.picture}}"alt="" title=""/>
         </div>
         <table class="table">
             <tbody>
@@ -27,8 +28,12 @@
                     <td>{{ rent.rentDatePost ? rent.rentDatePost|date('d/m/Y') : '' }}</td>
                 </tr>
                 <tr>
-                    <th>Disponibilité le</th>
+                    <th>Disponibilité</th>
                     <td>{{ rent.dispoDate ? rent.dispoDate|date('d/m/Y') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <td>{{ rent.rentPlace}}</td>
                 </tr>
                 <tr>
                     <th>Loyer men.</th>
@@ -49,13 +54,48 @@
             </tbody>
         </table>
 
-        <a href="{{ path('rent_index') }}">retour à la liste</a> - 
+
+
+        <a href="{{ path('rent_index') }}">retour à la liste</a>
         {% if app.user%}
             {%if id == rent.rentContact.id  %}
-                <a href="{{ path('rent_edit', {'id': rent.id}) }}">editer</a>
+                - <a href="{{ path('rent_edit', {'id': rent.id}) }}">editer</a>
                 {{ include('rent/_delete_form.html.twig') }}
             {% endif %}
         {% endif %}
 
     </div>
-{% endblock %}
+        {% set place = rent.rentPlace %}
+        <div class="container">
+            <h4 class='side'> En recherche d'emploi vers {{ place}} ?</h4>
+        <div class="card-deck mb-3 text-center">
+            
+
+            {% for job in jobs %}
+                {% if job.jobPlace == place %}
+
+
+
+
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-header">
+                            <h4 class="my-0 font-weight-normal"><a href="{{ path('job_show', {'id': job.id}) }}">{{ job.jobTitle }}</a></h4>
+                        </div>
+                        <div class="card-body">
+
+                            <ul class="list-unstyled mt-3 mb-4">
+
+                                <li>lieu: {{ job.jobPlace }}</li>
+                                <li> posté le: {{ job.jobDatePost ? job.jobDatePost|date('d/m/Y') : '' }}</li>
+                                <li>début le: {{ job.jobDateBegin ? job.jobDateBegin|date('d/m/Y') : '' }}</li>
+                                <li>salaire mensuel: {{ job.jobWages ~ '€' }}</li>
+                            </ul>
+                            <a href="{{ path('job_show', {'id': job.id}) }}" target="_blank"><button type="button" class="btn btn-lg btn-block btn-primary company">Voir la fiche</button></a>
+                        </div>
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+    {% endblock %}
