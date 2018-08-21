@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ job.jobTitle}}{% endblock %}
+{% block title %}{{ job.jobTitle}}
+{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>{{ job.jobTitle}}</h1>
- <div class="row">
-            <img class="rentimage img-responsive shadow" src="/uploads/pictures_directory/{{job.picture}}"alt="" title=""/>
+        <h1>{{ job.jobTitle}}, à
+            {{job.jobPlace}}</h1>
+        <div class="row">
+            <img class="rentimage img-responsive shadow" src="/uploads/pictures_directory/{{job.picture}}" alt="" title=""/>
         </div>
         <table class="table">
             <tbody>
@@ -39,17 +41,65 @@
                 <tr>
                     <th>Contact</th>
                     <td>{{job.jobContact}}
-                </tr>
-            </tbody>
-        </table>
+                    </tr>
+                </tbody>
+            </table>
 
-        <a href="{{ path('job_index') }}">retour à la liste</a>
-        {% if app.user%}
-            {% if id == job.jobContact.id  %}
-                <a href="{{ path('job_edit', {'id': job.id}) }}">editer</a>
+            <a href="{{ path('job_index') }}">retour à la liste</a>
+            {% if app.user%}
+                {% if id == job.jobContact.id %}
+                    <a href="{{ path('job_edit', {'id': job.id}) }}">editer</a>
 
-                {{ include('job/_delete_form.html.twig') }}
+                    {{ include('job/_delete_form.html.twig') }}
+                {% endif %}
             {% endif %}
-        {% endif %}
-    </div>
-{% endblock %}
+        </div>
+
+        {% set place = job.jobPlace %}
+        <div class="container">
+            <h4 class='side'>
+                En recherche de logement vers
+                {{ place}}
+                ?</h4>
+            <div class="card-deck mb-3 text-center">
+
+                {% for rent in rents %}
+                    {% if rent.rentPlace == place %}
+
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">
+                                    <a href="{{ path('rent_show', {'id': rent.id}) }}">{{ rent.rentTitle }}</a>
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                            <a href="{{ path('rent_show', {'id': rent.id}) }}" target="_blank">    <img class="gridimage img-responsive" src="/uploads/pictures_directory/{{rent.Picture}}" alt="" title=""/></a>
+                                <ul class="list-unstyled mt-3 mb-4">
+
+                                    <li>lieu:
+                                        {{ rent.rentPlace }}</li>
+                                    <li>surface:
+                                        {{ rent.rentSurface ~ 'm²' }}</li>
+                                    <li>
+                                        posté le:
+                                        {{ rent.rentDatePost ? rent.rentDatePost|date('d/m/Y') : '' }}</li>
+                                    <li>meublé:
+                                        {{ rent.furnished ? 'oui' : 'non' }}:
+                                    </li>
+                                    <li>loyer mensuel:
+                                        {{rent.monthCost ~ '€' }}
+                                    </li>
+
+                                </ul>
+                                <a href="{{ path('rent_show', {'id': rent.id}) }}" target="_blank">
+                                    <button type="button" class="btn btn-lg btn-block btn-primary owner">Voir la fiche</button>
+                                </a>
+                            </div>
+                        </div>
+
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+    {% endblock %}

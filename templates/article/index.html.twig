@@ -5,23 +5,36 @@
 {% block body %}
     <div class="container">
         <h1>Quoi de neuf chez Renty ?</h1>
-<div class="row">
-        {% for article in articles %}
-            <div class=' card article box-shadow'>
-                <img class="gridimage img-responsive" src="/uploads/pictures_directory/{{article.articlePicture}}"alt="" title=""/> 
-                <h3>{{ article.articleTitle }}</h3>
-                    <p> posté le: {{article.articleDate ? article.articleDate|date('d-m-Y') : '' }} par {{ article.fkUserId.username }} </p>
-                    <a href="{{ path('article_show', {'id': article.id}) }}"> <button class="btn btn-lg btn-block btn-primary">lire plus</button></a> 
+        <div class="container">
+            <div class="row">
+                <div class="card-deck mb-3 text-center">
+                    {% for article in articles %}
 
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">
+                                    <a href="{{ path('article_show', {'id': article.id}) }}">{{ article.articleTitle}}</a>
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <a href="{{ path('article_show', {'id': article.id}) }}"><img class="gridimage img-responsive" src="/uploads/pictures_directory/{{article.articlePicture}}" alt="" title=""/></a>
+                                <p class="metadata">
+                                    posté le:
+                                    {{article.articleDate ? article.articleDate|date('d-m-Y') : '' }}
+                                    par
+                                    {{ article.fkUserId.username }}
+                                </p>
+                                <p>{{article.articleDescription[:100] ~ '...'}}
+                                    <a href="{{ path('article_show', {'id': article.id}) }}">
+                                        <button type="button" class="btn btn-lg btn-block btn-primary">Voir la suite...</button>
+                                    </a>
+                                </div>
+                            </div>
+                        {% else %}
 
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-        {% else %}
-
-
-
-        {% endfor %}
-
-</div>
-
-    </div>
-{% endblock %} 
+        </div>
+    {% endblock %}

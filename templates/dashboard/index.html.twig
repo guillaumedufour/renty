@@ -4,11 +4,13 @@
 
 {% block body %}
 
-
     <div class="container">
 
-        <h1>Bienvenue sur votre espace {{ app.user.username }}</h1>
-        <h2> vos annonces de locations </h2>
+        <h1>Bienvenue sur votre espace
+            {{ app.user.username }}</h1>
+        <h2>
+            vos annonces de locations
+        </h2>
         <table id="tableau" class="display table table-striped table-bordered">
             <thead>
                 <tr>
@@ -19,13 +21,14 @@
                     <th>loyer m.</th>
                     <th>surface</th>
                     <th>meublé ?</th>
-                    <th>actions </th>
+                    <th>actions
+                    </th>
                 </tr>
             </thead>
             <tbody>
 
                 {% for rent in rents%}
-                    {% if id == rent.rentContact.id  %}
+                    {% if id == rent.rentContact.id %}
                         <tr>
                             <td>{{ rent.id }}</td>
                             <td>{{ rent.rentTitle }}</td>
@@ -35,17 +38,19 @@
                             <td>{{ rent.rentSurface }}</td>
                             <td>{{ rent.furnished ? 'oui' : 'non' }}</td>
                             <td>
-                                <a href="{{ path('rent_show', {'id': rent.id}) }}">voir</a> ou 
+                                <a href="{{ path('rent_show', {'id': rent.id}) }}">voir</a>
+                                ou
                                 <a href="{{ path('rent_edit', {'id': rent.id}) }}">editer</a>
                             </td>
                         </tr>
 
-                   
-                    {% endif %} 
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
-        <h2> vos annonces d'emploi </h2>
+        <h2>
+            vos annonces d'emploi
+        </h2>
         <table id="tableau" class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -61,7 +66,7 @@
             <tbody>
 
                 {% for job in jobs %}
-                    {% if id == job.jobContact.id  %}
+                    {% if id == job.jobContact.id %}
 
                         <tr>
                             <td>{{ job.id }}</td>
@@ -71,22 +76,25 @@
                             <td>{{ job.jobWages }}</td>
                             <td>{{ job.housed ? 'oui' : 'pas encore' }}</td>
                             <td>
-                                <a href="{{ path('job_show', {'id': job.id}) }}">voir</a> ou 
+                                <a href="{{ path('job_show', {'id': job.id}) }}">voir</a>
+                                ou
                                 <a href="{{ path('job_edit', {'id': job.id}) }}">editer</a>
                             </td>
                         </tr>
-                  
+
                     {% endif %}
                 {% endfor %}
 
             </tbody>
         </table>
 
-
-        <a href="{{ path('rent_new') }}">Créer une nouvelle location</a> ou
-        <a href="{{ path('job_new')}}">Créer une annonce d'emploi</a>
-
-
+        <a href="{{ path('rent_new')}}">
+            <button type="button" class="btn btn-lg btn-block btn-primary owner">Je loue un bien</button>
+        </a>
+        <a href="{{ path('job_new')}}">
+            <button type="button" class="btn btn-lg btn-block btn-primary company">Je crée un job</button>
+        </a>
+        
     </div>
 
 {% endblock %}

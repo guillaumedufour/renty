@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use App\Entity\Rent;
+use App\Repository\RentRepository;
 
 /**
  * @Route("/job")
@@ -77,8 +77,8 @@ class JobController extends Controller {
     /**
      * @Route("/{id}", name="job_show", methods="GET")
      */
-    public function show(Job $job): Response {
-        return $this->render('job/show.html.twig', ['job' => $job]);
+    public function show(Job $job, RentRepository $rentRepository): Response {
+        return $this->render('job/show.html.twig', ['job' => $job,'rents'=>$rentRepository->findAll()]);
     }
 
     /**

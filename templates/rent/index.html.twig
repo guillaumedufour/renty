@@ -3,7 +3,6 @@
 {% block title %}Annonces de location{% endblock %}
 
 {% block body %}
-    
 
     <table data-pagination="true" data-search="true" data-toggle="table" class="display table table-striped table-bordered">
         <thead>
@@ -15,23 +14,22 @@
                 <th data-sortable="true">Loyer mens.</th>
                 <th data-sortable="true">Surface</th>
                 <th data-sortable="true">Meublé ?</th>
-               
+
             </tr>
         </thead>
         <tbody>
             {% for rent in rents %}
                 <tr>
                     <td>{{ rent.id }}</td>
-                    <td><a href="{{ path('rent_show', {'id': rent.id}) }}">{{ rent.rentTitle }}</a></td>
+                    <td>
+                        <a href="{{ path('rent_show', {'id': rent.id}) }}">{{ rent.rentTitle }}</a>
+                    </td>
                     <td>{{ rent.rentPlace}}</td>
                     <td>{{ rent.rentDatePost ? rent.rentDatePost|date('d/m/Y') : '' }}</td>
-                    <td>{{ rent.monthCost }}</td>
+                    <td>{{ rent.monthCost ~ '€' }}</td>
                     <td>{{ rent.rentSurface }}</td>
                     <td>{{ rent.furnished ? 'oui' : 'non' }}</td>
-                    <!--<td>
-                        <a href="{{ path('rent_show', {'id': rent.id}) }}">voir</a>
-                        <a href="{{ path('rent_edit', {'id': rent.id}) }}">editer</a>
-                    </td>-->
+                    <!--<td> <a href="{{ path('rent_show', {'id': rent.id}) }}">voir</a> <a href="{{ path('rent_edit', {'id': rent.id}) }}">editer</a> </td>-->
                 </tr>
             {% else %}
                 <tr>
@@ -41,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('rent_new') }}">Créer une nouvelle location</a>
+     <a href="{{ path('rent_new')}}"><button type="button" class="btn btn-lg btn-block btn-primary owner">Je loue un bien</button></a>
 {% endblock %}

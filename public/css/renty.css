@@ -81,12 +81,7 @@ img.rentimage{
     max-height:400px;
     margin:3% auto;
 }
-div.article{
-    width:301px;
-    border:1px solid black;
-    text-align: center;
-    margin:10px auto;
-}
+
 img.gridimage{
     max-width:300px;
     max-height:200px;
@@ -107,4 +102,11 @@ a{
 }
 h4.side{
     margin:5% auto;
+}
+.metadata{
+    font-style: italic;
+    font-size: 70%;
+}
+button{
+    margin-top:5%;
 }
