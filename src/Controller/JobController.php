@@ -24,11 +24,6 @@ class JobController extends Controller {
         return $this->render('job/index.html.twig', ['jobs' => $jobRepository->findAll()]);
     }
 
-    /**
-     * @Route("/localjobs", name="job_local", methods="GET")
-     */
-   
-
         /**
          * @Route("/new", name="job_new", methods="GET|POST")
          * @Security("has_role('ROLE_USER')or has_role('ROLE_ADMIN')")
@@ -65,7 +60,7 @@ class JobController extends Controller {
         $em->persist($job);
         $em->flush();
 
-        return $this->redirectToRoute('job_index');
+        return $this->redirectToRoute('moncompte');
         }
 
         return $this->render('job/new.html.twig', [

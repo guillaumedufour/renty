@@ -19,7 +19,7 @@
                             <div class="card-body">
                                 <a href="{{ path('article_show', {'id': article.id}) }}"><img class="gridimage img-responsive" src="/uploads/pictures_directory/{{article.articlePicture}}" alt="" title=""/></a>
                                 <p class="metadata">
-                                    posté le:
+                                    posté le
                                     {{article.articleDate ? article.articleDate|date('d-m-Y') : '' }}
                                     par
                                     {{ article.fkUserId.username }}

@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
+use App\Entity\SectorArea;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class JobType extends AbstractType {
 
@@ -25,10 +27,11 @@ class JobType extends AbstractType {
                 ->add('jobDateBegin', DateType::class, array('label' => 'date de commencement'))
                 ->add('jobWages', IntegerType::class, array('label' => 'salaire mensuel'))
                 ->add('housed', CheckboxType::class, array('label' => 'logé?', 'required' => false))
-                ->add('jobPlace')
-                ->add('jobSector')
-                ->add('picture', FileType::class, array('label' => 'Image (JPEG file)','data_class' => null,'required' => false))
-           ;
+                ->add('jobPostalCode',IntegerType::class,array('label'=>'code postal'))
+                ->add('jobPlace',TextType::class,array('label'=>'commune'))
+                ->add('jobSector', EntityType::class, array('class'=> SectorArea::class,'label' =>'Secteur'))
+                ->add('picture', FileType::class, array('label' => 'veuillez télécharger une image d\'illustation', 'data_class' => null, 'required' => false))
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver) {

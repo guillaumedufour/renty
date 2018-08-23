@@ -67,12 +67,6 @@ class Rent
  
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Place")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $rentPlace;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="rentsfromusers")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -85,6 +79,17 @@ class Rent
      * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $picture;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $rentPlace;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $rentPostalCode;
+
 
     public function getPicture()
     {
@@ -189,17 +194,7 @@ class Rent
     }
 
 
-    public function getRentPlace(): ?Place
-    {
-        return $this->rentPlace;
-    }
 
-    public function setRentPlace(?Place $rentPlace): self
-    {
-        $this->rentPlace = $rentPlace;
-
-        return $this;
-    }
 
     public function getRentContact(): ?User
     {
@@ -212,6 +207,31 @@ class Rent
 
         return $this;
     }
+
+    public function getRentPlace(): ?string
+    {
+        return $this->rentPlace;
+    }
+
+    public function setRentPlace(?string $rentPlace): self
+    {
+        $this->rentPlace = $rentPlace;
+
+        return $this;
+    }
+
+    public function getRentPostalCode(): ?int
+    {
+        return $this->rentPostalCode;
+    }
+
+    public function setRentPostalCode(?int $rentPostalCode): self
+    {
+        $this->rentPostalCode = $rentPostalCode;
+
+        return $this;
+    }
+
 
   
 }

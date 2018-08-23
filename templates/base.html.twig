@@ -5,11 +5,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
-        <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+        <link rel="icon" type="image/x-icon" href="/img/favicon.png"/>
+        <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Renty - {% block title %}{% endblock %}</title>
+        <title>Renty -
+            {% block title %}{% endblock %}
+        </title>
         {% block stylesheets %}
             <link rel="stylesheet" href="/css/bootstrap.min.css">
             <link rel="stylesheet" href="/css/renty.css"/>
@@ -18,8 +20,6 @@
         {% endblock %}
 
     </head>
-    <body>
-
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom box-shadow">
             <a class="logo my-0 mr-md-auto font-weight-normal" href="{{path('index')}}"><img class="logo my-0 mr-md-auto font-weight-normal" src="/img/logorenty1.png" alt="logo renty" title="logo renty"></a>
             <nav class="my-2 my-md-0 mr-md-3">
@@ -28,72 +28,85 @@
                 <a class="p-2 text-light" href="{{ path('article_index')}}">Actualités</a>
 
                 {% if app.user %}
-                    <a class="p-2 blocUser"href="{{path('moncompte')}}" >Bienvenue {{app.user                                      .username }}</a>
+                    <a class="p-2 blocUser" href="{{path('moncompte')}}">Bienvenue
+                        {{app.user                                      .username }}</a>
                     <a class="p-2 blocUser" href="{{ path('security_logout')}}">Déconnexion</a>
                 {% else %}
                     <a class="p-2 blocUser" href="{{ path('user_registration')}}">Inscription</a>
                     <a class="p-2 blocUser" href="{{ path('security_login')}}">Connexion</a>
                 {% endif %}
 
-
             </nav>
         </div>
 
         <div class="container-fluid">
-        {% block body %}{% endblock %}
-    </div>
-    {% block footer %} 
-        <footer class="pt-4 my-md-5 pt-md-5 border-top">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 col-md img-center">
-                        <a href="{{ path('index')}}"><img class="img-responsive" src="/img/logorenty1.png" alt="logo renty" title="logo renty"></a>
-                    </div>
-                    <div class="col-6 col-md">
-                        <h5>rapide et facile !</h5>
-                        <ul class="list-unstyled text-small">
-                            <li><a class="text-muted" href="{{ path('rent_new')}}">mettre un bien en location</a></li>
-                            <li><a class="text-muted" href="{{ path('job_new')}}">créer une offre d'emploi</a></li>
-                            <li><a class="text-muted" href="{{ path('job_index')}}">Trouver un Job</a></li>
+            {% block body %}
+            {% endblock %}
+        </div>
+        {% block footer %}
+            <footer class="pt-4 my-md-5 pt-md-5 border-top">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-md img-center">
+                            <a href="{{ path('index')}}"><img class="img-responsive" src="/img/logorenty1.png" alt="logo renty" title="logo renty"></a>
+                        </div>
+                        <div class="col-6 col-md">
+                            <h5>rapide et facile !</h5>
+                            <ul class="list-unstyled text-small">
+                                <li>
+                                    <a class="text-muted" href="{{ path('rent_new')}}">mettre un bien en location</a>
+                                </li>
+                                <li>
+                                    <a class="text-muted" href="{{ path('job_new')}}">créer une offre d'emploi</a>
+                                </li>
+                                <li>
+                                    <a class="text-muted" href="{{ path('job_index')}}">Trouver un Job</a>
+                                </li>
 
-                        </ul>
-                    </div>
-                    <div class="col-6 col-md">
-                        <h5>à propos</h5>
-                        <ul class="list-unstyled text-small">
-                            <li><a class="text-muted" href="#">Qui sommes nous ?</a></li>
-                            <li><a href="{{ path('article_index')}}" class="text-muted" href="#">Actualités</a></li>
-                            <li><a class="text-muted" href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-md">
+                            <h5>à propos</h5>
+                            <ul class="list-unstyled text-small">
+                                <li>
+                                    <a class="text-muted" href="#">Qui sommes nous ?</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-muted">Actualités</a>
+                                </li>
+                                <li>
+                                    <a class="text-muted" href="#">Contact</a>
+                                </li>
 
-                        </ul>
-                    </div>
-                    <div class="col-6 col-md">
-                        <h5>mentions légales</h5>
-                        <ul class="list-unstyled text-small">
-                            <li><a class="text-muted" href="#">Confidentialité</a></li>
-                            <li><a class="text-muted" href="#">Conditions</a></li>
-                            <li><a class="text-muted" href="#">Guillaume DUFOUR @ 2018</a></li>
-                        </ul>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-md">
+                            <h5>mentions légales</h5>
+                            <ul class="list-unstyled text-small">
+                                <li>
+                                    <a class="text-muted" href="#">Confidentialité</a>
+                                </li>
+                                <li>
+                                    <a class="text-muted" href="#">Conditions</a>
+                                </li>
+                                <li>
+                                    <a class="text-muted" href="#">Guillaume DUFOUR @ 2018</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </footer>
+            </footer>
 
-
-    {% endblock %}
-    {% block javascripts %}
-        <!-- Optional JavaScript -->
-
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="/js/jquery-3.3.1.js"></script>
-        <script src="/js/popper.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/bootstrap-table.js"></script>
-        <script src="/js/bootstrap-table-fr-FR.js"></script>
-
-
-
-    {% endblock %}
-</body>
+        {% endblock %}
+        {% block javascripts %}
+            <script src="/js/jquery-3.3.1.js"></script>
+            <script src="/js/popper.min.js"></script>
+            <script src="/js/bootstrap.min.js"></script>
+            <script src="/js/bootstrap-table.js"></script>
+            <script src="/js/bootstrap-table-fr-FR.js"></script>
+           
+        {% endblock %}
+    </body>
 </html>

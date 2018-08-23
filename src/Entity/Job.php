@@ -45,12 +45,7 @@ class Job
      */
     private $jobWages;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Place", inversedBy="jobsInPlace")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $jobPlace;
-
+   
     /**
      * @ORM\Column(type="boolean")
      */
@@ -85,6 +80,16 @@ class Job
      * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $picture;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $jobPlace;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $jobPostalCode;
 
     public function getPicture()
     {
@@ -147,17 +152,7 @@ class Job
         return $this;
     }
 
-    public function getJobPlace(): ?Place
-    {
-        return $this->jobPlace;
-    }
-
-    public function setJobPlace(?Place $jobPlace): self
-    {
-        $this->jobPlace = $jobPlace;
-
-        return $this;
-    }
+    
 
     public function getHoused(): ?bool
     {
@@ -203,6 +198,30 @@ class Job
     public function setJobDatePost(\DateTimeInterface $jobDatePost): self
     {
         $this->jobDatePost = $jobDatePost;
+
+        return $this;
+    }
+
+    public function getJobPlace(): ?string
+    {
+        return $this->jobPlace;
+    }
+
+    public function setJobPlace(?string $jobPlace): self
+    {
+        $this->jobPlace = $jobPlace;
+
+        return $this;
+    }
+
+    public function getJobPostalCode(): ?int
+    {
+        return $this->jobPostalCode;
+    }
+
+    public function setJobPostalCode(?int $jobPostalCode): self
+    {
+        $this->jobPostalCode = $jobPostalCode;
 
         return $this;
     }
