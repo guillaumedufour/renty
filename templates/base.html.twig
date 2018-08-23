@@ -10,103 +10,197 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Renty -
-            {% block title %}{% endblock %}
-        </title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="/css/bootstrap.min.css">
-            <link rel="stylesheet" href="/css/renty.css"/>
-            <link rel="stylesheet" href="/css/bootstrap-table.css"/>
+        {% block title %}{% endblock %}
+    </title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/renty.css"/>
+        <link rel="stylesheet" href="/css/bootstrap-table.css"/>
 
+    {% endblock %}
+
+</head>
+<body onload="setDefaultCountry()">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom box-shadow">
+        <a class="logo my-0 mr-md-auto font-weight-normal" href="{{path('index')}}"><img class="logo my-0 mr-md-auto font-weight-normal" src="/img/logorenty1.png" alt="logo renty" title="logo renty"></a>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-light" href="{{ path('rent_index')}}">Locations</a>
+            <a class="p-2 text-light" href="{{ path('job_index')}}">Jobs</a>
+            <a class="p-2 text-light" href="{{ path('article_index')}}">Actualités</a>
+
+            {% if app.user %}
+                <a class="p-2 blocUser" href="{{path('moncompte')}}">Bienvenue
+                    {{app.user                                      .username }}</a>
+                <a class="p-2 blocUser" href="{{ path('security_logout')}}">Déconnexion</a>
+            {% else %}
+                <a class="p-2 blocUser" href="{{ path('user_registration')}}">Inscription</a>
+                <a class="p-2 blocUser" href="{{ path('security_login')}}">Connexion</a>
+            {% endif %}
+
+        </nav>
+    </div>
+
+    <div class="container-fluid">
+        {% block body %}
         {% endblock %}
+    </div>
+    {% block footer %}
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-md img-center">
+                        <a href="{{ path('index')}}"><img class="img-responsive" src="/img/logorenty1.png" alt="logo renty" title="logo renty"></a>
+                    </div>
+                    <div class="col-6 col-md">
+                        <h5>rapide et facile !</h5>
+                        <ul class="list-unstyled text-small">
+                            <li>
+                                <a class="text-muted" href="{{ path('rent_new')}}">mettre un bien en location</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="{{ path('job_new')}}">créer une offre d'emploi</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="{{ path('job_index')}}">Trouver un Job</a>
+                            </li>
 
-    </head>
-        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom box-shadow">
-            <a class="logo my-0 mr-md-auto font-weight-normal" href="{{path('index')}}"><img class="logo my-0 mr-md-auto font-weight-normal" src="/img/logorenty1.png" alt="logo renty" title="logo renty"></a>
-            <nav class="my-2 my-md-0 mr-md-3">
-                <a class="p-2 text-light" href="{{ path('rent_index')}}">Locations</a>
-                <a class="p-2 text-light" href="{{ path('job_index')}}">Jobs</a>
-                <a class="p-2 text-light" href="{{ path('article_index')}}">Actualités</a>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md">
+                        <h5>à propos</h5>
+                        <ul class="list-unstyled text-small">
+                            <li>
+                                <a class="text-muted" href="#">Qui sommes nous ?</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-muted">Actualités</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Contact</a>
+                            </li>
 
-                {% if app.user %}
-                    <a class="p-2 blocUser" href="{{path('moncompte')}}">Bienvenue
-                        {{app.user                                      .username }}</a>
-                    <a class="p-2 blocUser" href="{{ path('security_logout')}}">Déconnexion</a>
-                {% else %}
-                    <a class="p-2 blocUser" href="{{ path('user_registration')}}">Inscription</a>
-                    <a class="p-2 blocUser" href="{{ path('security_login')}}">Connexion</a>
-                {% endif %}
-
-            </nav>
-        </div>
-
-        <div class="container-fluid">
-            {% block body %}
-            {% endblock %}
-        </div>
-        {% block footer %}
-            <footer class="pt-4 my-md-5 pt-md-5 border-top">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 col-md img-center">
-                            <a href="{{ path('index')}}"><img class="img-responsive" src="/img/logorenty1.png" alt="logo renty" title="logo renty"></a>
-                        </div>
-                        <div class="col-6 col-md">
-                            <h5>rapide et facile !</h5>
-                            <ul class="list-unstyled text-small">
-                                <li>
-                                    <a class="text-muted" href="{{ path('rent_new')}}">mettre un bien en location</a>
-                                </li>
-                                <li>
-                                    <a class="text-muted" href="{{ path('job_new')}}">créer une offre d'emploi</a>
-                                </li>
-                                <li>
-                                    <a class="text-muted" href="{{ path('job_index')}}">Trouver un Job</a>
-                                </li>
-
-                            </ul>
-                        </div>
-                        <div class="col-6 col-md">
-                            <h5>à propos</h5>
-                            <ul class="list-unstyled text-small">
-                                <li>
-                                    <a class="text-muted" href="#">Qui sommes nous ?</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-muted">Actualités</a>
-                                </li>
-                                <li>
-                                    <a class="text-muted" href="#">Contact</a>
-                                </li>
-
-                            </ul>
-                        </div>
-                        <div class="col-6 col-md">
-                            <h5>mentions légales</h5>
-                            <ul class="list-unstyled text-small">
-                                <li>
-                                    <a class="text-muted" href="#">Confidentialité</a>
-                                </li>
-                                <li>
-                                    <a class="text-muted" href="#">Conditions</a>
-                                </li>
-                                <li>
-                                    <a class="text-muted" href="#">Guillaume DUFOUR @ 2018</a>
-                                </li>
-                            </ul>
-                        </div>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md">
+                        <h5>mentions légales</h5>
+                        <ul class="list-unstyled text-small">
+                            <li>
+                                <a class="text-muted" href="#">Confidentialité</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Conditions</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Guillaume DUFOUR @ 2018</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+            </div>
 
-            </footer>
+        </footer>
 
-        {% endblock %}
-        {% block javascripts %}
-            <script src="/js/jquery-3.3.1.js"></script>
-            <script src="/js/popper.min.js"></script>
-            <script src="/js/bootstrap.min.js"></script>
-            <script src="/js/bootstrap-table.js"></script>
-            <script src="/js/bootstrap-table-fr-FR.js"></script>
-           
-        {% endblock %}
-    </body>
+    {% endblock %}
+    {% block javascripts %}
+        <script type="text/javascript" src="http://api.geonames.org/export/geonamesData.js?username=guillaumedufour"></script>
+        <script src="/js/jsr_class.js"></script>
+        <script src="/js/jquery-3.3.1.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/bootstrap-table.js"></script>
+        <script src="/js/bootstrap-table-fr-FR.js"></script>
+
+        <script type="text/javascript" >
+   // postalcodes is filled by the JSON callback and used by the mouse event handlers of the suggest box
+   var postalcodes;
+   // this function will be called by our JSON callback
+   // the parameter jData will contain an array with postalcode objects
+   function getLocation(jData) {
+       if (jData === null) {
+           // There was a problem parsing search results
+           return;
+       }
+       // save place array in 'postalcodes' to make it accessible from mouse event handlers
+       postalcodes = jData.postalcodes;
+       if (postalcodes.length > 1) {
+           // we got several places for the postalcode
+           // make suggest box visible
+           document.getElementById('suggestBoxElement').style.visibility = 'visible';
+           var suggestBoxHTML = '';
+           // iterate over places and build suggest box content
+           for (i = 0; i < jData.postalcodes.length; i++) {
+               // for every postalcode record we create a html div 
+               // each div gets an id using the array index for later retrieval 
+               // define mouse event handlers to highlight places on mouseover
+               // and to select a place on click
+               // all events receive the postalcode array index as input parameter
+               suggestBoxHTML += "<div class='suggestions' id=pcId" + i + " onmousedown='suggestBoxMouseDown(" + i + ")' onmouseover='suggestBoxMouseOver(" + i + ")' onmouseout='suggestBoxMouseOut(" + i + ")'> " + postalcodes[i].countryCode + ' ' + postalcodes[i].postalcode + '    ' + postalcodes[i].placeName + '</div>';
+           }
+           // display suggest box
+           document.getElementById('suggestBoxElement').innerHTML = suggestBoxHTML;
+       } else {
+           if (postalcodes.length === 1) {
+               // exactly one place for postalcode
+               // directly fill the form, no suggest box required 
+               var placeInput = document.getElementById("rent_rentPlace");
+               placeInput.value = postalcodes[0].placeName;
+           }
+           closeSuggestBox();
+       }
+   }
+   function closeSuggestBox() {
+       document.getElementById('suggestBoxElement').innerHTML = '';
+       document.getElementById('suggestBoxElement').style.visibility = 'hidden';
+   }
+   // remove highlight on mouse out event
+   function suggestBoxMouseOut(obj) {
+       document.getElementById('pcId' + obj).className = 'suggestions';
+   }
+   // the user has selected a place name from the suggest box
+   function suggestBoxMouseDown(obj) {
+       closeSuggestBox();
+       var placeInput = document.getElementById("rent_rentPlace");
+       placeInput.value = postalcodes[obj].placeName;
+   }
+   // function to highlight places on mouse over event
+   function suggestBoxMouseOver(obj) {
+       document.getElementById('pcId' + obj).className = 'suggestionMouseOver';
+   }
+   // this function is called when the user leaves the postal code input field
+   // it call the geonames.org JSON webservice to fetch an array of places 
+   // for the given postal code 
+   function postalCodeLookup() {
+       var country = document.getElementById("countrySelect").value;
+       if (geonamesPostalCodeCountries.toString().search(country) === -1) {
+           return; // selected country not supported by geonames
+       }
+       // display 'loading' in suggest box
+       document.getElementById('suggestBoxElement').style.visibility = 'visible';
+       document.getElementById('suggestBoxElement').innerHTML = '<small><i>loading ...</i></small>';
+       var postalcode = document.getElementById("rent_rentPostalCode").value;
+       request = 'http://api.geonames.org/postalCodeLookupJSON?postalcode=' + postalcode + '&country=' + country + '&callback=getLocation&username=demo';
+       // Create a new script object
+       aObj = new JSONscriptRequest(request);
+       // Build the script tag
+       aObj.buildScriptTag();
+       // Execute (add) the script tag
+       aObj.addScriptTag();
+   }
+   // set the country of the user's ip (included in geonamesData.js) as selected country 
+   // in the country select box of the address form
+   function setDefaultCountry() {
+       var countrySelect = document.getElementById("countrySelect");
+       for (i = 0; i < countrySelect.length; i++) {
+           // the javascript geonamesData.js contains the countrycode
+           // of the userIp in the variable 'geonamesUserIpCountryCode'
+           if (countrySelect[i].value === geonamesUserIpCountryCode) {
+               // set the country selectionfield
+               countrySelect.selectedIndex = i;
+           }
+       }
+   }
+        </script>
+
+    {% endblock %}
+</body>
 </html>

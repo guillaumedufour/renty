@@ -1,5 +1,12 @@
 {{ form_start(form) }}
 {{ form_widget(form) }}
+<select id="countrySelect" name="country">
+    <option value="FR"> France</option>
+</select>
+{{ form_row(form.rentPostalCode, {'attr': {'onblur': 'postalCodeLookup();'} }) }}
+{{ form_row(form.rentPlace, {'attr': {'onblur': 'closeSuggestBox();'} }) }}
+
+<span style="z-index:25;visibility: hidden;" id="suggestBoxElement"></span>
 
 <p> votre adresse de contact sera celle renseignée dans votre compte: {{app.user.email }}</p>
 <button class="btn">{{ button_label|default('Publier') }}</button>

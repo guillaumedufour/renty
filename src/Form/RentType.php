@@ -12,7 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
 
@@ -29,8 +28,8 @@ class RentType extends AbstractType {
                 ->add('monthCost', IntegerType::class, array('label' => 'loyer mensuel'))
                 ->add('rentSurface', IntegerType::class, array('label' => 'surface logement'))
                 ->add('furnished', CheckboxType::class, array('label' => 'le logement est il meublé?', 'required' => false))
-                ->add('rentPostalCode',IntegerType::class,array('label'=>'code postal','attr'=>array('id'=>'postalcodeInput','name'=>'postalcode','onblur'=>'postalCodeLookup();')))
-                ->add('rentPlace',TextType::class,array('label'=>'commune','attr'=>array('id'=>'placeInput','name'=>'place','onblur'=>'closeSuggestBox();')))
+                ->add('rentPostalCode',TextType::class,array('label'=>'code postal'))
+                ->add('rentPlace',TextType::class,array('label'=>'commune'))
                 ->add('picture', FileType::class, array('label' => 'veuillez télécharger une image d\'illustation','data_class' => null,'required' => false))
         ;
     }
